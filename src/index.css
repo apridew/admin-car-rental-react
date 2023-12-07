@@ -1,0 +1,34 @@
+:root {
+  font-family: Helvetica, Arial, sans-serif;
+
+  --DarkBlue01: #CFD4ED;
+  --DarkBlue02: #AEB7E1;
+  --DarkBlue03: #5E70C4;
+  --DarkBlue04: #0D28A6;
+  --DarkBlue05: #091B6F;
+
+  --LimeGreen01: #DEF1DF;
+  --LimeGreen02: #C9E7CA;
+  --LimeGreen03: #92D094;
+  --LimeGreen04: #5CB85F;
+  --LimeGreen05: #3D7B3F;
+
+  --Neutral01: #FFFFFF;
+  --Neutral02: #D0D0D0;
+  --Neutral03: #8A8A8A;
+  --Neutral04: #3C3C3C;
+  --Neutral05: #151515;
+
+  --AlertDanger: #FA2C5A;
+  --AlertWarning: #F9CC00;
+  --AlertSuccess: #73CA5C;
+}
+
+html {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+}
