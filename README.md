@@ -1,8 +1,18 @@
-# React + Vite
+# Binar Car Rental for Admin - Platinum Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is part of the Binar Academy for Platinum Challenge.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before getting started, make sure you have Node.js and npm (Node Package Manager) installed on your computer.
+
+## Installation
+
+Install the dependencies and start the server.
+
+```sh
+npm i
+npm run dev
+```
+
+**Thankyou!**
