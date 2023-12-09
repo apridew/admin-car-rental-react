@@ -2,11 +2,13 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import "./style.css"
+import { useNavigate } from "react-router-dom"
 
 const SignInPage = () => {
 
   const { login } = useSelector((state) => state)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -50,7 +52,8 @@ const SignInPage = () => {
               }
           })
 
-          alert("succes")
+          // alert("succes")
+          navigate("/")
       } catch (error) {
           console.log(error.response.data);
           setError("Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.")
