@@ -1,7 +1,15 @@
+import Navbar from '../../components/Navbar';
+
 const AddCarPage = () => {
   return (
     <>
-      <div className="container-fluid">Add Car Page</div>;
+      <Navbar
+        main={
+          <>
+            <h1>Add Car Page</h1>
+          </>
+        }
+      />
     </>
   );
 };

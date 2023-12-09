@@ -24,11 +24,6 @@
   --AlertSuccess: #73CA5C;
 }
 
-html {
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
 a {
   text-decoration: none;
 }

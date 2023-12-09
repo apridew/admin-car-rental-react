@@ -1,10 +1,15 @@
+import Navbar from '../../components/Navbar';
+
 const NotFound = () => {
   return (
     <>
-      <div className="container-fluid">
-        <h1>Not Found</h1>
-      </div>
-      ;
+      <Navbar
+        main={
+          <>
+            <h1>Not Found Page</h1>
+          </>
+        }
+      />
     </>
   );
 };
