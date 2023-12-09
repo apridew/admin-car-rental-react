@@ -65,9 +65,9 @@ const SignInPage = () => {
                   <div className="logo"></div>
 
                   <div className="login-detail">
-                      <h1>Welcome admin BCR</h1>
+                      <h1>Welcome, admin BCR</h1>
 
-                      {login ? "" : <p className="login-error">{error}</p>}
+                      {error && <p className="login-error">{error}</p>}
 
                       <div className="login-input">
                           <label htmlFor="email">Email</label>
