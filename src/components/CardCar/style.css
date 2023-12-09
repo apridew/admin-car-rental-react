@@ -1,0 +1,47 @@
+#card-car {
+    max-width: 351px;
+    min-height: 482px;
+    padding: 24px;
+}
+
+#card-car img {
+    width: 303px;
+    height: 222px;
+}
+
+#card-car button {
+    width: 143.5px;
+    height: 48px;
+}
+
+#card-car button:first-of-type {
+    background-color: white;
+    border: 1px solid var(--AlertDanger);
+    color: var(--AlertDanger);
+    font-weight: bold;
+
+    &:hover {
+        background-color: var(--AlertDanger);
+        color: white;
+    }
+}
+
+i .bi-trash {
+    color: var(--AlertDanger);
+
+    &:hover {
+        color: white;
+    }
+}
+
+#card-car button:last-of-type {
+    background-color: var(--LimeGreen04);
+    border: 1px solid;
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+        color: var(--LimeGreen04);
+        background-color: white;
+    }
+}
