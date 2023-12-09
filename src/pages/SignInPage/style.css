@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+
+.login-container {
+    width: 100%;
+    height: 100vh;
+    background: url("../../assets/img/cover-dashboard.png");
+    background-size: cover;
+    background-position: 170%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    
+}
+
+.login-container .login-side {
+    background-color: white;
+    position: absolute;
+    right: 0;
+    width: 384px;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.login-container .login-side .logo {
+    width: 100px;
+    height: 34px;
+    background-color: #CFD4ED;
+}
+
+.login-side .login-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-side .login-detail h1 {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 700;
+}
+
+.login-side .login-detail .login-error {
+    font-size: 12px;
+    width: auto;
+    background: rgba(208, 12, 26, 0.10);
+    color: #D00C1A;
+    line-height: 18px;
+}
+
+.login-side .login-detail .login-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-side .login-detail .login-input label {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.login-side .login-detail .login-input input {
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.login-side .login-detail button {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #0D28A6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
