@@ -1,47 +1,79 @@
 #card-car {
-    max-width: 351px;
-    min-height: 482px;
-    padding: 24px;
+  max-width: 351px;
+  min-height: 482px;
+  padding: 24px;
+}
+
+#card-car i {
+  font-size: 20px;
+  padding-right: 5px;
+}
+
+.bi-clock {
+  color: #00000043;
+}
+
+#card-car p {
+  color: #000;
+  font-family: Arial;
+}
+#card-car p:first-of-type {
+  padding-top: 16px;
+}
+
+#card-car p:first-of-type,
+#card-car p:nth-of-type(3),
+#card-car p:last-of-type {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+#card-car p:nth-of-type(2) {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 #card-car img {
-    width: 303px;
-    height: 222px;
+  width: 303px;
+  height: 222px;
+  border-radius: 8px;
 }
 
 #card-car button {
-    width: 143.5px;
-    height: 48px;
+  width: 143.5px;
+  height: 48px;
 }
 
 #card-car button:first-of-type {
-    background-color: white;
-    border: 1px solid var(--AlertDanger);
-    color: var(--AlertDanger);
-    font-weight: bold;
+  background-color: white;
+  border: 1px solid var(--AlertDanger);
+  color: var(--AlertDanger);
+  font-weight: bold;
 
-    &:hover {
-        background-color: var(--AlertDanger);
-        color: white;
-    }
+  &:hover {
+    background-color: var(--AlertDanger);
+    color: white;
+  }
 }
 
 i .bi-trash {
-    color: var(--AlertDanger);
+  color: var(--AlertDanger);
 
-    &:hover {
-        color: white;
-    }
+  &:hover {
+    color: white;
+  }
 }
 
 #card-car button:last-of-type {
-    background-color: var(--LimeGreen04);
-    border: 1px solid;
-    color: white;
-    font-weight: bold;
+  background-color: var(--LimeGreen04);
+  border: 1px solid;
+  color: white;
+  font-weight: bold;
 
-    &:hover {
-        color: var(--LimeGreen04);
-        background-color: white;
-    }
+  &:hover {
+    color: var(--LimeGreen04);
+    background-color: white;
+  }
 }

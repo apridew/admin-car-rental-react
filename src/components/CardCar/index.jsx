@@ -1,5 +1,5 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import "./style.css";
 
 const CardCar = ({ img, name, price, capacity, time }) => {
   return (
@@ -7,7 +7,7 @@ const CardCar = ({ img, name, price, capacity, time }) => {
       <div id="card-car" className="card">
         <img src={img} alt={name} />
         <p>{name}</p>
-        <p>{price}/hari</p>
+        <p>{price} / hari</p>
         <p>
           <i className="bi bi-people"></i>
           {capacity}
