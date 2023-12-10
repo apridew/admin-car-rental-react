@@ -7,12 +7,14 @@ import * as formater from "../../helpers/formaters";
 import ButtonSearch from "../../components/ButtonSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
+import { useNavigate } from "react-router-dom";
 
 const CarsPage = () => {
   const { car_list, isLoading, name_car } = useSelector(
     (state) => state.carsReducer
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [allClicked, setAllClicked] = useState(true);
   const [smallClicked, setSmallClicked] = useState(false);
@@ -122,7 +124,7 @@ const CarsPage = () => {
             </div>
             <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
               <p>List Car</p>
-              <button>
+              <button onClick={() => navigate("/add-car")}>
                 <i className="bi bi-plus"></i> Add New Car
               </button>
             </div>
@@ -165,6 +167,7 @@ const CarsPage = () => {
                 }
                 return (
                   <CardCar
+                    id={item.id}
                     key={id}
                     img={item.image}
                     price={formater.idrFormater(item.price)}

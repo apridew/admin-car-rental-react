@@ -1,7 +1,9 @@
 import React from "react";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
-const CardCar = ({ img, name, price, capacity, time }) => {
+const CardCar = ({ img, name, price, capacity, time, id }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div id="card-car" className="card">
@@ -20,7 +22,7 @@ const CardCar = ({ img, name, price, capacity, time }) => {
           <button>
             <i className="bi bi-trash"></i> Delete
           </button>
-          <button>
+          <button onClick={() => navigate(`/edit-car/${id}`)}>
             <i className="bi bi-pencil-square"></i> Edit
           </button>
         </div>
