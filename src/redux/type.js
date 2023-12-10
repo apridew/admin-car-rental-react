@@ -1,0 +1,5 @@
+export const TYPES = {
+    SET_LOGIN: 'SET_LOGIN',
+    CHOOSE_SIDEBAR: 'CHOOSE_SIDEBAR',
+    ALL_CARS: 'ALL_CARS'
+  };

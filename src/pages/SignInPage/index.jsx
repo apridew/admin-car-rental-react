@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { TYPES } from '../../redux/type';
 
 const SignInPage = () => {
   const { login } = useSelector((state) => state.loginReducer);
@@ -49,7 +50,7 @@ const SignInPage = () => {
       console.log(ress.data);
 
       dispatch({
-        type: 'SET_LOGIN',
+        type: TYPES.SET_LOGIN,
         payload: {
           data: true,
         },

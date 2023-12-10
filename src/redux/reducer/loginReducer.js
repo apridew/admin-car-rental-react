@@ -1,3 +1,5 @@
+import { TYPES } from "../type";
+
 const loginState = {
   login: false,
   chooseSidebar: true,
@@ -5,12 +7,12 @@ const loginState = {
 
 export const loginReducer = (state = loginState, action) => {
   switch (action.type) {
-    case 'SET_LOGIN':
+    case TYPES.SET_LOGIN:
       return {
         ...state,
         login: action.payload.data,
       };
-    case 'CHOOSE_SIDEBAR':
+    case TYPES.CHOOSE_SIDEBAR:
       return {
         ...state,
         chooseSidebar: action.payload.sidebar,

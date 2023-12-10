@@ -3,15 +3,16 @@ import './style.css';
 import logo from '../../assets/img/logo.png';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { TYPES } from '../../redux/type';
 const Navbar = ({ main }) => {
-  const [showSidebar, setshowSidebar] = useState(false);
   const { chooseSidebar } = useSelector((state) => state.loginReducer);
+  const [showSidebar, setshowSidebar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const dashboardClick = () => {
     dispatch({
-      type: 'CHOOSE_SIDEBAR',
+      type: TYPES.CHOOSE_SIDEBAR,
       payload: {
         sidebar: true,
       },
@@ -20,7 +21,7 @@ const Navbar = ({ main }) => {
   };
   const carsClick = () => {
     dispatch({
-      type: 'CHOOSE_SIDEBAR',
+      type: TYPES.CHOOSE_SIDEBAR,
       payload: {
         sidebar: false,
       },

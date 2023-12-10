@@ -5,7 +5,7 @@ export const getCars = async (name, category, isRented, minPrice, maxPrice) => {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      access_token: token,
     },
   };
 
