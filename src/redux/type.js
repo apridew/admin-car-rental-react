@@ -1,5 +1,8 @@
 export const TYPES = {
     SET_LOGIN: 'SET_LOGIN',
     CHOOSE_SIDEBAR: 'CHOOSE_SIDEBAR',
-    ALL_CARS: 'ALL_CARS'
+    ALL_CARS: 'ALL_CARS',
+    NAME_CAR: 'NAME_CAR',
+    IS_SUBMIT: 'IS_SUBMIT',
+    IS_LOADING: 'IS_LOADING',
   };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getCars = async (name, category, isRented, minPrice, maxPrice) => {
+export const getCars = async (name, category) => {
   const token = localStorage.getItem('accesToken');
 
   const config = {
@@ -10,7 +10,7 @@ export const getCars = async (name, category, isRented, minPrice, maxPrice) => {
   };
 
   const response = await axios.get(
-    `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&isRented=${isRented}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=1&pageSize=10`,
+    `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=1&pageSize=10`,
     config
   );
 

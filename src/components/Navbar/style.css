@@ -1,128 +1,137 @@
 .bi-list,
 .bi-x {
-    font-size: 24px;
-    cursor: pointer;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 #navbar .col {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .avatar {
-    background: var(--DarkBlue01);
-    padding: 10px 15px;
-    color: var(--Neutral05);
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 16px;
+  background: var(--DarkBlue01);
+  padding: 8px 15px;
+  color: var(--Neutral05);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .searh-box button {
-    border-color: var(--DarkBlue04);
-    color: var(--DarkBlue04);
-    border-radius: 2px;
-    font-size: 14px;
-    padding: 8px 12px;
-    width: 71px;
-    height: 36px;
+  border-radius: 2px;
+  font-size: 14px;
+  padding: 8px 12px;
+  width: 71px;
+  height: 36px;
+}
 
-    &:hover {
-        background: var(--DarkBlue04);
-        color: var(--Neutral01);
-    }
+.btn-outline-primary {
+  border-color: var(--DarkBlue04);
+  color: var(--DarkBlue04);
+  &:hover {
+    background: var(--DarkBlue04);
+    color: var(--Neutral01);
+  }
+}
+
+.btn-outline-danger {
+  color: var(--AlertDanger);
+  border-color: var(--AlertDanger);
+  &:hover {
+    background: var(--AlertDanger);
+    color: var(--Neutral01);
+  }
 }
 
 #navbar select {
-    color: var(--Neutral05);
-    font-size: 14px;
-    padding-right: 10px;
-    border: none;
-    outline: none;
-    scroll-behavior: smooth;
+  color: var(--Neutral05);
+  font-size: 14px;
+  padding-right: 10px;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
 }
 
 #navbar input {
-    border: 1px solid var(--Neutral02);
-    border-radius: 2px;
-    padding: 8px;
-    font-size: 14px;
-    height: 36px;
-
+  border: 1px solid var(--Neutral02);
+  border-radius: 2px;
+  padding: 8px;
+  font-size: 14px;
+  height: 36px;
 }
 
 #navbar input:focus {
-    outline: none;
-    border: 1px solid var(--DarkBlue03);
+  outline: none;
+  border: 1px solid var(--DarkBlue03);
 }
 
 #navbar span {
-    position: relative;
-    left: 30px;
+  position: relative;
+  left: 30px;
 }
 
 .header-bar {
-    height: 70px;
+  height: 70px;
 }
 
 .side-bar-left {
-    color: var(--Neutral01);
-    width: 70px;
-    background-color: var(--DarkBlue04);
-    font-size: 12px;
-    height: 100vh;
+  color: var(--Neutral01);
+  width: 70px;
+  background-color: var(--DarkBlue04);
+  font-size: 12px;
+  height: 100%;
 }
 
 .side-bar-left i {
-    cursor: pointer;
-    font-size: 24px;
+  cursor: pointer;
+  font-size: 24px;
 }
 
 .box {
-    padding: 0px 5px;
-
+  padding: 0px 5px;
 }
 
 .bg-box {
-    background: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .box:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .side-bar-right p,
 .side-bar-right button {
-    color: var(--Neutral03);
-    font-weight: 700;
-    padding: 25px 25px;
-    height: 42px;
-    text-align: start;
-    width: 220px;
+  color: var(--Neutral03);
+  font-weight: 700;
+  padding: 25px 25px;
+  height: 42px;
+  text-align: start;
+  width: 220px;
 }
 
 .side-bar-right button {
-    background: var(--DarkBlue01);
-    border: none;
-    color: var(--Neutral05);
-    padding: 12px 24px;
-    margin-top: 15px;
-    cursor: auto;
+  background: var(--DarkBlue01);
+  border: none;
+  color: var(--Neutral05);
+  padding: 12px 24px;
+  margin-top: 15px;
+  cursor: auto;
 }
 
 .side-bar-right h5,
 .side-bar-left .logo {
-    height: 70px;
+  height: 70px;
 }
 
 .side-bar-right h5,
 .header-bar {
-    padding-left: 25px;
-    padding-right: 25px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.151);
+  padding-left: 25px;
+  padding-right: 25px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.151);
 }
 
 .content {
-    padding: 32px 25px 0px 25px;
-    height: 92vh;
+  padding: 32px 25px 0px 25px;
+  min-height: 92vh;
 }

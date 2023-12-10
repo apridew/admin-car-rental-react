@@ -1,8 +1,10 @@
-import './style.css';
-const ButtonSearch = ({ value }) => {
+import "./style.css";
+const ButtonSearch = ({ text, chooseCategory, style }) => {
   return (
     <>
-      <button className="btn-search">{value}</button>
+      <button onClick={chooseCategory} className={`btn-search ${style}`}>
+        {text}
+      </button>
     </>
   );
 };
