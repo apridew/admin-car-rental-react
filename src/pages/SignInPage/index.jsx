@@ -52,7 +52,6 @@ const SignInPage = () => {
               }
           })
 
-          // alert("succes")
           navigate("/")
       } catch (error) {
           console.log(error.response.data);
