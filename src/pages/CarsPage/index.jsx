@@ -43,6 +43,12 @@ const CarsPage = () => {
           data: res.data.cars,
         },
       });
+      dispatch({
+        type: TYPES.IS_LOADING,
+        payload: {
+          loading: false,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -116,69 +122,79 @@ const CarsPage = () => {
         resetSearch={resetSearch}
         submitSearch={submitSearch}
         main={
-          <div id="cars-page">
-            <div className="cars-row-1 d-flex gap-2">
-              <p className="fw-bold">Car</p>
-              <p className="fw-bold">&gt;</p>
-              <p>List Car</p>
+          isLoading ? (
+            <div className="wrapper-spinner">
+              <div className="spinner-border tex" role="status">
+                <span className="visually-hidden"></span>
+              </div>
             </div>
-            <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
-              <p>List Car</p>
-              <button onClick={() => navigate("/add-car")}>
-                <i className="bi bi-plus"></i> Add New Car
-              </button>
-            </div>
+          ) : (
+            <div id="cars-page">
+              <div className="cars-row-1 d-flex gap-2">
+                <p className="fw-bold">Car</p>
+                <p className="fw-bold">&gt;</p>
+                <p>List Car</p>
+              </div>
+              <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
+                <p>List Car</p>
+                <button onClick={() => navigate("/add-car")}>
+                  <i className="bi bi-plus"></i> Add New Car
+                </button>
+              </div>
 
-            <div className="button-search mb-4">
-              <ButtonSearch
-                name={""}
-                chooseCategory={() => chooseCategory("")}
-                text={"All"}
-                style={allClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"small"}
-                chooseCategory={() => chooseCategorySmall("small")}
-                text={"2 - 4 people"}
-                style={smallClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"medium"}
-                chooseCategory={() => chooseCategoryMedium("medium")}
-                text={"4 - 6 people"}
-                style={mediumClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"large"}
-                chooseCategory={() => chooseCategoryLarge("large")}
-                text={"6 - 8 people"}
-                style={largeClicked ? "clicked" : ""}
-              />
+              <div className="button-search mb-4">
+                <ButtonSearch
+                  name={""}
+                  chooseCategory={() => chooseCategory("")}
+                  text={"All"}
+                  style={allClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"small"}
+                  chooseCategory={() => chooseCategorySmall("small")}
+                  text={"2 - 4 people"}
+                  style={smallClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"medium"}
+                  chooseCategory={() => chooseCategoryMedium("medium")}
+                  text={"4 - 6 people"}
+                  style={mediumClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"large"}
+                  chooseCategory={() => chooseCategoryLarge("large")}
+                  text={"6 - 8 people"}
+                  style={largeClicked ? "clicked" : ""}
+                />
+              </div>
+              <div className="list-all-card">
+                {car_list.map((item, id) => {
+                  let categoryText = "";
+                  if (item.category === "small") {
+                    categoryText = "2 - 4 people";
+                  } else if (item.category === "people") {
+                    categoryText = "4 - 6 people";
+                  } else {
+                    categoryText = "6 - 8 people";
+                  }
+                  return (
+                    <CardCar
+                      id={item.id}
+                      key={id}
+                      img={item.image}
+                      price={formater.idrFormater(item.price)}
+                      name={item.name}
+                      capacity={categoryText}
+                      time={`Updated at ${formater.dateFormater(
+                        item.updatedAt
+                      )}`}
+                    />
+                  );
+                })}
+              </div>
             </div>
-            <div className="list-all-card">
-              {car_list.map((item, id) => {
-                let categoryText = "";
-                if (item.category === "small") {
-                  categoryText = "2 - 4 people";
-                } else if (item.category === "people") {
-                  categoryText = "4 - 6 people";
-                } else {
-                  categoryText = "6 - 8 people";
-                }
-                return (
-                  <CardCar
-                    id={item.id}
-                    key={id}
-                    img={item.image}
-                    price={formater.idrFormater(item.price)}
-                    name={item.name}
-                    capacity={categoryText}
-                    time={`Updated at ${formater.dateFormater(item.updatedAt)}`}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          )
         }
       />
     </>
