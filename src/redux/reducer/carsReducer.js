@@ -5,6 +5,7 @@ const carsState = {
   isLoading: true,
   name_car: "",
   isSubmit: false,
+  isDelete: false,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -28,6 +29,11 @@ export const carsReducer = (state = carsState, action) => {
       return {
         ...state,
         isLoading: action.payload.loading,
+      };
+    case TYPES.IS_DELETE:
+      return {
+        ...state,
+        isDelete: action.payload.delete,
       };
 
     default:

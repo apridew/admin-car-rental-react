@@ -1,3 +1,28 @@
+.wrapper-dialog-box {
+  z-index: 15;
+  position: fixed;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-bg {
+  height: 100vh;
+  width: 100%;
+  z-index: 14;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0000004f;
+}
+
+#navbar {
+  top: 0;
+  position: absolute;
+}
+
 .cars-row-1 {
   font-size: 12px;
 }

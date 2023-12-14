@@ -8,9 +8,10 @@ import ButtonSearch from "../../components/ButtonSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
 import { useNavigate } from "react-router-dom";
+import DeleteDialog from "../../components/DeleteDialog";
 
 const CarsPage = () => {
-  const { car_list, isLoading, name_car } = useSelector(
+  const { car_list, isLoading, name_car, isDelete } = useSelector(
     (state) => state.carsReducer
   );
   const dispatch = useDispatch();
@@ -116,8 +117,32 @@ const CarsPage = () => {
     setLargeClicked(true);
   };
 
+  const handleDialogNo = () => {
+    dispatch({
+      type: TYPES.IS_DELETE,
+      payload: {
+        delete: false,
+      },
+    });
+  };
+
+  const handleDialogYes = () => {
+    console.log("delete");
+  };
+
   return (
     <>
+      {isDelete && (
+        <>
+          <div className="overlay-bg"></div>
+          <div className="wrapper-dialog-box">
+            <DeleteDialog
+              handleClickNo={handleDialogNo}
+              handleClickYes={handleDialogYes}
+            />
+          </div>
+        </>
+      )}
       <Navbar
         resetSearch={resetSearch}
         submitSearch={submitSearch}
@@ -145,25 +170,25 @@ const CarsPage = () => {
               <div className="button-search mb-4">
                 <ButtonSearch
                   name={""}
-                  chooseCategory={() => chooseCategory("")}
+                  handleClick={() => chooseCategory("")}
                   text={"All"}
                   style={allClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"small"}
-                  chooseCategory={() => chooseCategorySmall("small")}
+                  handleClick={() => chooseCategorySmall("small")}
                   text={"2 - 4 people"}
                   style={smallClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"medium"}
-                  chooseCategory={() => chooseCategoryMedium("medium")}
+                  handleClick={() => chooseCategoryMedium("medium")}
                   text={"4 - 6 people"}
                   style={mediumClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"large"}
-                  chooseCategory={() => chooseCategoryLarge("large")}
+                  handleClick={() => chooseCategoryLarge("large")}
                   text={"6 - 8 people"}
                   style={largeClicked ? "clicked" : ""}
                 />
