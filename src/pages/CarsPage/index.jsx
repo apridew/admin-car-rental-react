@@ -1,31 +1,27 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-import CardCar from "../../components/CardCar";
-import Navbar from "../../components/Navbar";
-import * as reqApi from "../../helpers/apis";
-import * as formater from "../../helpers/formaters";
-import ButtonSearch from "../../components/ButtonSearch";
 import { useDispatch, useSelector } from "react-redux";
-import { TYPES } from "../../redux/type";
 import { useNavigate } from "react-router-dom";
-import DeleteDialog from "../../components/DeleteDialog";
+import { TYPES } from "../../redux/type";
+import { getListCars } from "../../redux/actions/carsAction";
+import Navbar from "../../components/Navbar";
+import ButtonSearch from "../../components/ButtonSearch";
+import AllCars from "../../components/AllCars";
 
 const CarsPage = () => {
-  const { car_list, isLoading, name_car, isDelete } = useSelector(
-    (state) => state.carsReducer
-  );
+  const { isLoading, name_car } = useSelector((state) => state.carsReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [category, setCategory] = useState("");
   const [allClicked, setAllClicked] = useState(true);
   const [smallClicked, setSmallClicked] = useState(false);
   const [mediumClicked, setMediumClicked] = useState(false);
   const [largeClicked, setLargeClicked] = useState(false);
 
-  console.log(category);
-
   useEffect(() => {
-    getListCars(name_car, category);
+    dispatch(getListCars(name_car, category));
     dispatch({
       type: TYPES.CHOOSE_SIDEBAR,
       payload: {
@@ -34,29 +30,8 @@ const CarsPage = () => {
     });
   }, [category]);
 
-  const getListCars = async (name, category) => {
-    try {
-      const res = await reqApi.getCars(name, category);
-      // console.log("API All Cars", res.data.cars);
-      dispatch({
-        type: TYPES.ALL_CARS,
-        payload: {
-          data: res.data.cars,
-        },
-      });
-      dispatch({
-        type: TYPES.IS_LOADING,
-        payload: {
-          loading: false,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const submitSearch = () => {
-    getListCars(name_car, category);
+    dispatch(getListCars(name_car, category));
     dispatch({
       type: TYPES.IS_SUBMIT,
       payload: {
@@ -78,7 +53,8 @@ const CarsPage = () => {
         name_car: "",
       },
     });
-    getListCars("", "");
+    dispatch(getListCars("", ""));
+
     setAllClicked(true);
     setSmallClicked(false);
     setMediumClicked(false);
@@ -117,32 +93,8 @@ const CarsPage = () => {
     setLargeClicked(true);
   };
 
-  const handleDialogNo = () => {
-    dispatch({
-      type: TYPES.IS_DELETE,
-      payload: {
-        delete: false,
-      },
-    });
-  };
-
-  const handleDialogYes = () => {
-    console.log("delete");
-  };
-
   return (
     <>
-      {isDelete && (
-        <>
-          <div className="overlay-bg"></div>
-          <div className="wrapper-dialog-box">
-            <DeleteDialog
-              handleClickNo={handleDialogNo}
-              handleClickYes={handleDialogYes}
-            />
-          </div>
-        </>
-      )}
       <Navbar
         resetSearch={resetSearch}
         submitSearch={submitSearch}
@@ -193,31 +145,7 @@ const CarsPage = () => {
                   style={largeClicked ? "clicked" : ""}
                 />
               </div>
-              <div className="list-all-card">
-                {car_list.map((item, id) => {
-                  let categoryText = "";
-                  if (item.category === "small") {
-                    categoryText = "2 - 4 people";
-                  } else if (item.category === "people") {
-                    categoryText = "4 - 6 people";
-                  } else {
-                    categoryText = "6 - 8 people";
-                  }
-                  return (
-                    <CardCar
-                      id={item.id}
-                      key={id}
-                      img={item.image}
-                      price={formater.idrFormater(item.price)}
-                      name={item.name}
-                      capacity={categoryText}
-                      time={`Updated at ${formater.dateFormater(
-                        item.updatedAt
-                      )}`}
-                    />
-                  );
-                })}
-              </div>
+              <AllCars />
             </div>
           )
         }

@@ -6,6 +6,7 @@ const carsState = {
   name_car: "",
   isSubmit: false,
   isDelete: false,
+  successDelete: false,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -34,6 +35,11 @@ export const carsReducer = (state = carsState, action) => {
       return {
         ...state,
         isDelete: action.payload.delete,
+      };
+    case TYPES.SUCCESS_DELETE:
+      return {
+        ...state,
+        successDelete: action.payload.deleteStatus,
       };
 
     default:
