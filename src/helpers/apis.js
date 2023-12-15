@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getCars = async (name, category) => {
-  const token = localStorage.getItem('accesToken');
+  const token = localStorage.getItem("accesToken");
 
   const config = {
     headers: {
