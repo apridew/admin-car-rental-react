@@ -2,6 +2,7 @@ import { TYPES } from "../type";
 
 const carsState = {
   car_list: [],
+  idCar: null,
   isLoading: true,
   name_car: "",
   isSubmit: false,
@@ -34,6 +35,7 @@ export const carsReducer = (state = carsState, action) => {
     case TYPES.IS_DELETE:
       return {
         ...state,
+        idCar: action.payload.idCar,
         isDelete: action.payload.delete,
       };
     case TYPES.SUCCESS_DELETE:

@@ -7,13 +7,15 @@ import { TYPES } from "../../redux/type";
 const CardCar = ({ img, name, price, capacity, time, id }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     dispatch({
       type: TYPES.IS_DELETE,
       payload: {
+        idCar: id,
         delete: true,
       },
     });
+    console.log(id);
   };
   return (
     <>
@@ -30,7 +32,7 @@ const CardCar = ({ img, name, price, capacity, time, id }) => {
           {time}
         </p>
         <div className="button-bottom d-flex gap-3">
-          <button onClick={handleDelete}>
+          <button onClick={() => handleDelete(id)}>
             <i className="bi bi-trash"></i> Delete
           </button>
           <button onClick={() => navigate(`/edit-car/${id}`)}>

@@ -1,0 +1,46 @@
+.breadcrumb-item a {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.breadcrumb-item {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.form-upload-file {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.instuscution-upload-form p {
+  color: grey;
+}
+
+.form-upload-file input[type="file"] {
+  display: none;
+}
+
+.form-category {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.button-submit {
+  position: absolute;
+  bottom: 4%;
+}
+
+.btn-save {
+  background-color: red;
+}

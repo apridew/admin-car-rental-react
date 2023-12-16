@@ -3,7 +3,7 @@ import dialogImage from "../../assets/img/car-alert.png";
 import ButtonSearch from "../ButtonSearch";
 import { useSelector } from "react-redux";
 const DeleteDialog = ({ handleClickYes, handleClickNo }) => {
-  const { successdelete } = useSelector((state) => state.carsReducer);
+  const { successDelete } = useSelector((state) => state.carsReducer);
 
   return (
     <div className="container" id="delete-dialog">
@@ -13,17 +13,17 @@ const DeleteDialog = ({ handleClickYes, handleClickNo }) => {
         </div>
         <div className="col">
           <h2>
-            {successdelete
+            {successDelete
               ? "Berhasil Hapus Data Mobil"
               : "Menghapus Data Mobil"}
           </h2>
           <p>
-            {successdelete
-              ? "Data mobil sudah dihapus, mohon menuggu beberapa saat untuk            kembali melihat data."
-              : "Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin            menghapus?"}
+            {successDelete
+              ? "Data mobil sudah dihapus, mohon tunggu beberapa saat untuk kembali melihat data."
+              : "Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?"}
           </p>
         </div>
-        {successdelete ? (
+        {successDelete ? (
           <i className="bi bi-check2-circle text-center fs-2 text-success"></i>
         ) : (
           <div className="col d-flex justify-content-center gap-3">

@@ -3,12 +3,17 @@ import CardCar from "../CardCar";
 import DeleteDialog from "../DeleteDialog";
 import { useDispatch, useSelector } from "react-redux";
 import * as formater from "../../helpers/formaters";
+import * as reqApi from "../../helpers/apis";
 import { getListCars } from "../../redux/actions/carsAction";
 import { TYPES } from "../../redux/type";
+import { useEffect } from "react";
 
 const AllCars = () => {
-  const { car_list, isDelete } = useSelector((state) => state.carsReducer);
+  const { car_list, isDelete, idCar } = useSelector(
+    (state) => state.carsReducer
+  );
   const dispatch = useDispatch();
+
   const handleDialogNo = () => {
     dispatch({
       type: TYPES.IS_DELETE,
@@ -18,9 +23,9 @@ const AllCars = () => {
     });
   };
 
-  const handleDialogYes = async (id) => {
+  const handleDialogYes = async () => {
     try {
-      const res = await reqApi.deleteCar(id);
+      const res = await reqApi.deleteCar(idCar);
       dispatch(getListCars("", ""));
       console.log(res);
       dispatch({
@@ -36,7 +41,13 @@ const AllCars = () => {
             delete: false,
           },
         });
-      }, 2000);
+        dispatch({
+          type: TYPES.SUCCESS_DELETE,
+          payload: {
+            deleteStatus: false,
+          },
+        });
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -52,10 +63,12 @@ const AllCars = () => {
           let categoryText = "";
           if (item.category === "small") {
             categoryText = "2 - 4 people";
-          } else if (item.category === "people") {
+          } else if (item.category === "medium") {
             categoryText = "4 - 6 people";
-          } else {
+          } else if (item.category === "large") {
             categoryText = "6 - 8 people";
+          } else {
+            categoryText = "Undefined";
           }
           return (
             <div key={id}>
@@ -67,20 +80,20 @@ const AllCars = () => {
                 capacity={categoryText}
                 time={`Updated at ${formater.dateFormater(item.updatedAt)}`}
               />
-              {isDelete && (
-                <>
-                  <div className="overlay-bg"></div>
-                  <div className="wrapper-dialog-box">
-                    <DeleteDialog
-                      handleClickNo={handleDialogNo}
-                      handleClickYes={() => handleDialogYes(item.id)}
-                    />
-                  </div>
-                </>
-              )}
             </div>
           );
         })
+      )}
+      {isDelete && (
+        <>
+          <div className="overlay-bg"></div>
+          <div className="wrapper-dialog-box">
+            <DeleteDialog
+              handleClickYes={handleDialogYes}
+              handleClickNo={handleDialogNo}
+            />
+          </div>
+        </>
       )}
     </div>
   );
