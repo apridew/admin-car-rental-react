@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import './style.css';
-import { useNavigate } from 'react-router-dom';
-import { TYPES } from '../../redux/type';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import "./style.css";
+import { useNavigate } from "react-router-dom";
+import { TYPES } from "../../redux/type";
 
 const SignInPage = () => {
   const { login } = useSelector((state) => state.loginReducer);
@@ -12,20 +12,20 @@ const SignInPage = () => {
 
   //   console.log(login);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleUsername = (e) => {
     console.log(e.target.value);
     setEmail(e.target.value);
-    setError('');
+    setError("");
   };
 
   const handlePassword = (e) => {
     console.log(e.target.value);
     setPassword(e.target.value);
-    setError('');
+    setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const SignInPage = () => {
     };
 
     if (!email || !password) {
-      setError('Password dan Email harus diisi');
+      setError("Password dan Email harus diisi");
       return;
     }
 
@@ -46,7 +46,7 @@ const SignInPage = () => {
         `https://api-car-rental.binaracademy.org/admin/auth/login`,
         bodyPayload
       );
-      localStorage.setItem('accesToken', ress.data.access_token);
+      localStorage.setItem("accesToken", ress.data.access_token);
       console.log(ress.data);
 
       dispatch({
@@ -57,11 +57,13 @@ const SignInPage = () => {
       });
       // alert("succes")
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 2000);
     } catch (error) {
       console.log(error.response.data);
-      setError('Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.');
+      setError(
+        "Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital."
+      );
     }
   };
 
@@ -100,7 +102,7 @@ const SignInPage = () => {
                   <span className="visually-hidden"></span>
                 </div>
               ) : (
-                'Sign In'
+                "Sign In"
               )}
             </button>
           </div>
