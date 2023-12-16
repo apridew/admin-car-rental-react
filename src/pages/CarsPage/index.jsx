@@ -7,6 +7,7 @@ import { getListCars } from "../../redux/actions/carsAction";
 import Navbar from "../../components/Navbar";
 import ButtonSearch from "../../components/ButtonSearch";
 import AllCars from "../../components/AllCars";
+import { Breadcrumb } from "react-bootstrap";
 
 const CarsPage = () => {
   const { isLoading, name_car } = useSelector((state) => state.carsReducer);
@@ -107,11 +108,10 @@ const CarsPage = () => {
             </div>
           ) : (
             <div id="cars-page">
-              <div className="cars-row-1 d-flex gap-2">
-                <p className="fw-bold">Car</p>
-                <p className="fw-bold">&gt;</p>
-                <p>List Car</p>
-              </div>
+              <Breadcrumb>
+                <Breadcrumb.Item href="/">Cars</Breadcrumb.Item>
+                <Breadcrumb.Item active>List Car</Breadcrumb.Item>
+              </Breadcrumb>
               <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
                 <p>List Car</p>
                 <button onClick={() => navigate("/add-car")}>

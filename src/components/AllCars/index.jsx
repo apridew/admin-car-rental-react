@@ -6,7 +6,6 @@ import * as formater from "../../helpers/formaters";
 import * as reqApi from "../../helpers/apis";
 import { getListCars } from "../../redux/actions/carsAction";
 import { TYPES } from "../../redux/type";
-import { useEffect } from "react";
 
 const AllCars = () => {
   const { car_list, isDelete, idCar } = useSelector(
@@ -47,7 +46,7 @@ const AllCars = () => {
             deleteStatus: false,
           },
         });
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -60,16 +59,8 @@ const AllCars = () => {
         </div>
       ) : (
         car_list.map((item, id) => {
-          let categoryText = "";
-          if (item.category === "small") {
-            categoryText = "2 - 4 people";
-          } else if (item.category === "medium") {
-            categoryText = "4 - 6 people";
-          } else if (item.category === "large") {
-            categoryText = "6 - 8 people";
-          } else {
-            categoryText = "Undefined";
-          }
+          const categoryText = formater.categoryTextFormater(item.category);
+
           return (
             <div key={id}>
               <CardCar
