@@ -2,9 +2,12 @@ import { TYPES } from "../type";
 
 const carsState = {
   car_list: [],
-  isLoading: false,
-  name_car:'',
+  idCar: null,
+  isLoading: true,
+  name_car: "",
   isSubmit: false,
+  isDelete: false,
+  successDelete: false,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -24,10 +27,21 @@ export const carsReducer = (state = carsState, action) => {
         ...state,
         isSubmit: action.payload.submit,
       };
-      case TYPES.IS_LOADING:
+    case TYPES.IS_LOADING:
       return {
         ...state,
         isLoading: action.payload.loading,
+      };
+    case TYPES.IS_DELETE:
+      return {
+        ...state,
+        idCar: action.payload.idCar,
+        isDelete: action.payload.delete,
+      };
+    case TYPES.SUCCESS_DELETE:
+      return {
+        ...state,
+        successDelete: action.payload.deleteStatus,
       };
 
     default:

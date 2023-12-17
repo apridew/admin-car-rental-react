@@ -1,8 +1,8 @@
 import "./style.css";
-const ButtonSearch = ({ text, chooseCategory, style }) => {
+const ButtonSearch = ({ text, handleClick, style }) => {
   return (
     <>
-      <button onClick={chooseCategory} className={`btn-search ${style}`}>
+      <button onClick={handleClick} className={`btn-search ${style}`}>
         {text}
       </button>
     </>

@@ -1,30 +1,28 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-import CardCar from "../../components/CardCar";
-import Navbar from "../../components/Navbar";
-import * as reqApi from "../../helpers/apis";
-import * as formater from "../../helpers/formaters";
-import ButtonSearch from "../../components/ButtonSearch";
 import { useDispatch, useSelector } from "react-redux";
-import { TYPES } from "../../redux/type";
 import { useNavigate } from "react-router-dom";
+import { TYPES } from "../../redux/type";
+import { getListCars } from "../../redux/actions/carsAction";
+import Navbar from "../../components/Navbar";
+import ButtonSearch from "../../components/ButtonSearch";
+import AllCars from "../../components/AllCars";
+import { Breadcrumb } from "react-bootstrap";
 
 const CarsPage = () => {
-  const { car_list, isLoading, name_car } = useSelector(
-    (state) => state.carsReducer
-  );
+  const { isLoading, name_car } = useSelector((state) => state.carsReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [category, setCategory] = useState("");
   const [allClicked, setAllClicked] = useState(true);
   const [smallClicked, setSmallClicked] = useState(false);
   const [mediumClicked, setMediumClicked] = useState(false);
   const [largeClicked, setLargeClicked] = useState(false);
 
-  console.log(category);
-
   useEffect(() => {
-    getListCars(name_car, category);
+    dispatch(getListCars(name_car, category));
     dispatch({
       type: TYPES.CHOOSE_SIDEBAR,
       payload: {
@@ -33,23 +31,8 @@ const CarsPage = () => {
     });
   }, [category]);
 
-  const getListCars = async (name, category) => {
-    try {
-      const res = await reqApi.getCars(name, category);
-      // console.log("API All Cars", res.data.cars);
-      dispatch({
-        type: TYPES.ALL_CARS,
-        payload: {
-          data: res.data.cars,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const submitSearch = () => {
-    getListCars(name_car, category);
+    dispatch(getListCars(name_car, category));
     dispatch({
       type: TYPES.IS_SUBMIT,
       payload: {
@@ -71,7 +54,8 @@ const CarsPage = () => {
         name_car: "",
       },
     });
-    getListCars("", "");
+    dispatch(getListCars("", ""));
+
     setAllClicked(true);
     setSmallClicked(false);
     setMediumClicked(false);
@@ -116,69 +100,54 @@ const CarsPage = () => {
         resetSearch={resetSearch}
         submitSearch={submitSearch}
         main={
-          <div id="cars-page">
-            <div className="cars-row-1 d-flex gap-2">
-              <p className="fw-bold">Car</p>
-              <p className="fw-bold">&gt;</p>
-              <p>List Car</p>
+          isLoading ? (
+            <div className="wrapper-spinner">
+              <div className="spinner-border tex" role="status">
+                <span className="visually-hidden"></span>
+              </div>
             </div>
-            <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
-              <p>List Car</p>
-              <button onClick={() => navigate("/add-car")}>
-                <i className="bi bi-plus"></i> Add New Car
-              </button>
-            </div>
+          ) : (
+            <div id="cars-page">
+              <Breadcrumb>
+                <Breadcrumb.Item href="/">Cars</Breadcrumb.Item>
+                <Breadcrumb.Item active>List Car</Breadcrumb.Item>
+              </Breadcrumb>
+              <div className="cars-row-2 d-flex justify-content-between align-items-center mb-3">
+                <p>List Car</p>
+                <button onClick={() => navigate("/add-car")}>
+                  <i className="bi bi-plus"></i> Add New Car
+                </button>
+              </div>
 
-            <div className="button-search mb-4">
-              <ButtonSearch
-                name={""}
-                chooseCategory={() => chooseCategory("")}
-                text={"All"}
-                style={allClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"small"}
-                chooseCategory={() => chooseCategorySmall("small")}
-                text={"2 - 4 people"}
-                style={smallClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"medium"}
-                chooseCategory={() => chooseCategoryMedium("medium")}
-                text={"4 - 6 people"}
-                style={mediumClicked ? "clicked" : ""}
-              />
-              <ButtonSearch
-                name={"large"}
-                chooseCategory={() => chooseCategoryLarge("large")}
-                text={"6 - 8 people"}
-                style={largeClicked ? "clicked" : ""}
-              />
+              <div className="button-search mb-4">
+                <ButtonSearch
+                  name={""}
+                  handleClick={() => chooseCategory("")}
+                  text={"All"}
+                  style={allClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"small"}
+                  handleClick={() => chooseCategorySmall("small")}
+                  text={"2 - 4 people"}
+                  style={smallClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"medium"}
+                  handleClick={() => chooseCategoryMedium("medium")}
+                  text={"4 - 6 people"}
+                  style={mediumClicked ? "clicked" : ""}
+                />
+                <ButtonSearch
+                  name={"large"}
+                  handleClick={() => chooseCategoryLarge("large")}
+                  text={"6 - 8 people"}
+                  style={largeClicked ? "clicked" : ""}
+                />
+              </div>
+              <AllCars />
             </div>
-            <div className="list-all-card">
-              {car_list.map((item, id) => {
-                let categoryText = "";
-                if (item.category === "small") {
-                  categoryText = "2 - 4 people";
-                } else if (item.category === "people") {
-                  categoryText = "4 - 6 people";
-                } else {
-                  categoryText = "6 - 8 people";
-                }
-                return (
-                  <CardCar
-                    id={item.id}
-                    key={id}
-                    img={item.image}
-                    price={formater.idrFormater(item.price)}
-                    name={item.name}
-                    capacity={categoryText}
-                    time={`Updated at ${formater.dateFormater(item.updatedAt)}`}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          )
         }
       />
     </>

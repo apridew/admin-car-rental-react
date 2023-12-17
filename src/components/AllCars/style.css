@@ -1,0 +1,44 @@
+.notif-no-data {
+  width: 100%;
+  min-height: 50vh;
+}
+
+.wrapper-dialog-box {
+  z-index: 15;
+  position: fixed;
+  min-height: 100vh;
+  min-width: 75vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+
+.overlay-bg {
+  height: 100vh;
+  width: 100%;
+  z-index: 14;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0000008e;
+  opacity: 100%;
+}
+
+.list-all-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.wrapper-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.wrapper-spinner .spinner-border {
+  width: 50px;
+  height: 50px;
+}
