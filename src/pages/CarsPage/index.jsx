@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TYPES } from "../../redux/type";
 import { getListCars } from "../../redux/actions/carsAction";
+import { Breadcrumb } from "react-bootstrap";
 import Navbar from "../../components/Navbar";
 import ButtonSearch from "../../components/ButtonSearch";
 import AllCars from "../../components/AllCars";
-import { Breadcrumb } from "react-bootstrap";
+import PaginationCars from "../../components/Pagination";
 
 const CarsPage = () => {
-  const { isLoading, name_car } = useSelector((state) => state.carsReducer);
+  const { isLoading, name_car, currentPage, totalPage, countAllCars } =
+    useSelector((state) => state.carsReducer);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,17 +24,18 @@ const CarsPage = () => {
   const [largeClicked, setLargeClicked] = useState(false);
 
   useEffect(() => {
-    dispatch(getListCars(name_car, category));
+    dispatch(getListCars(name_car, category, currentPage, 9));
     dispatch({
       type: TYPES.CHOOSE_SIDEBAR,
       payload: {
         sidebar: false,
       },
     });
-  }, [category]);
+  }, [category, currentPage]);
 
+  console.log("Page :", currentPage, "Total Page :", totalPage);
   const submitSearch = () => {
-    dispatch(getListCars(name_car, category));
+    dispatch(getListCars(name_car, category, currentPage, ""));
     dispatch({
       type: TYPES.IS_SUBMIT,
       payload: {
@@ -54,7 +57,7 @@ const CarsPage = () => {
         name_car: "",
       },
     });
-    dispatch(getListCars("", ""));
+    dispatch(getListCars("", "", "", 9));
 
     setAllClicked(true);
     setSmallClicked(false);
@@ -146,6 +149,16 @@ const CarsPage = () => {
                 />
               </div>
               <AllCars />
+              <div className="bottom-cars d-flex justify-content-between align-items-center">
+                <PaginationCars name_car={name_car} category={category} />
+                <p className="m-0 fw-bold d-flex align-items-center gap-3">
+                  Total Cars : {countAllCars}
+                  <a>|</a>
+                  <a href="#">
+                    <i className="bi bi-arrow-up-circle fs-4"></i>
+                  </a>
+                </p>
+              </div>
             </div>
           )
         }

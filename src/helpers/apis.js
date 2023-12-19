@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const token = localStorage.getItem("accesToken");
-export const getCars = async (name, category) => {
+// const token = localStorage.getItem("accesToken");
+export const getCars = async (name, category, page, totalPage) => {
+  const token = localStorage.getItem("accesToken");
+
   try {
     const config = {
       headers: {
@@ -10,9 +12,10 @@ export const getCars = async (name, category) => {
     };
 
     const response = await axios.get(
-      `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=1&pageSize=10`,
+      `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=${page}&pageSize=${totalPage}`,
       config
     );
+    console.log(response.data);
 
     return response;
   } catch (error) {
@@ -22,6 +25,8 @@ export const getCars = async (name, category) => {
 };
 
 export const deleteCar = async (id) => {
+  const token = localStorage.getItem("accesToken");
+
   try {
     const config = {
       headers: {

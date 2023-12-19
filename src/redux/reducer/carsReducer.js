@@ -8,6 +8,9 @@ const carsState = {
   isSubmit: false,
   isDelete: false,
   successDelete: false,
+  currentPage: 1,
+  totalPage: null,
+  countAllCars: null,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -42,6 +45,13 @@ export const carsReducer = (state = carsState, action) => {
       return {
         ...state,
         successDelete: action.payload.deleteStatus,
+      };
+    case TYPES.PAGINATION:
+      return {
+        ...state,
+        currentPage: action.payload.currentPage,
+        totalPage: action.payload.totalPage,
+        countAllCars: action.payload.countAllCars,
       };
 
     default:
