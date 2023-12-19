@@ -1,0 +1,10 @@
+.active > .page-link,
+.page-link.active {
+  background-color: var(--DarkBlue01) !important;
+  border-color: var(--DarkBlue01) !important;
+  color: var(--DarkBlue05) !important;
+}
+
+.pagination {
+  cursor: pointer;
+}
