@@ -7,7 +7,7 @@
   z-index: 15;
   position: fixed;
   min-height: 100vh;
-  min-width: 75vw;
+  min-width: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@
 .list-all-card {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 23px;
 }
 
 .wrapper-spinner {

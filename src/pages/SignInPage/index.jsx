@@ -58,6 +58,12 @@ const SignInPage = () => {
       // alert("succes")
       setTimeout(() => {
         navigate("/");
+        dispatch({
+          type: TYPES.SET_LOGIN,
+          payload: {
+            data: false,
+          },
+        });
       }, 2000);
     } catch (error) {
       console.log(error.response.data);

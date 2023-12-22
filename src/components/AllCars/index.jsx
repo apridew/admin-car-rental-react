@@ -25,7 +25,7 @@ const AllCars = () => {
   const handleDialogYes = async () => {
     try {
       const res = await reqApi.deleteCar(idCar);
-      dispatch(getListCars("", ""));
+      dispatch(getListCars("", "", "", 9));
       console.log(res);
       dispatch({
         type: TYPES.SUCCESS_DELETE,
@@ -55,7 +55,7 @@ const AllCars = () => {
     <div className="list-all-card">
       {!car_list.length ? (
         <div className="notif-no-data d-flex justify-content-center align-items-center">
-          <h1>Mobil yang dicari belum terdaftar</h1>
+          <h1>Mobil belum tersedia</h1>
         </div>
       ) : (
         car_list.map((item, id) => {

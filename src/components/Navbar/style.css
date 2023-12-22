@@ -100,6 +100,10 @@
   cursor: pointer;
 }
 
+.side-bar-right {
+  margin-left: 70px;
+}
+
 .side-bar-right p,
 .side-bar-right button {
   color: var(--Neutral03);
@@ -134,4 +138,13 @@
 .content {
   padding: 32px 25px 0px 25px;
   min-height: 92vh;
+}
+
+.dropdown-item:hover {
+  background-color: var(--DarkBlue01) !important;
+}
+
+.card .spinner-border {
+  width: 1rem;
+  height: 1rem;
 }
