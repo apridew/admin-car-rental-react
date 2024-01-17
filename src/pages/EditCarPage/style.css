@@ -1,0 +1,100 @@
+.breadcrumb-item a {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.breadcrumb-item {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  font-weight: bolder;
+  content: var(--bs-breadcrumb-divider, ">") !important;
+}
+
+.container-form span {
+  color: red;
+}
+
+.form-section p:first-of-type {
+  font-size: 10px;
+}
+.form-upload-file {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.form-upload-file input[type="file"] {
+  display: none;
+}
+
+.form-upload-file label {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651);
+}
+
+.form-category option,
+.form-category select {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651) !important;
+}
+
+.form-category {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.imageLabel {
+  overflow: hidden;
+}
+
+.button-submit {
+  position: absolute;
+  bottom: 4%;
+}
+
+.button-submit .cancel {
+  color: var(--DarkBlue04);
+  background: transparent;
+  border-radius: 2px;
+
+  &:hover {
+    border-color: var(--AlertDanger) !important;
+    color: var(--AlertDanger) !important;
+    background: var(--Neutral01) !important;
+  }
+}
+
+.button-submit .save:hover {
+  border-color: var(--LimeGreen04);
+  background: var(--LimeGreen04) !important;
+  border-radius: 2px;
+}
+
+.notification {
+  display: flex;
+  position: relative;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--Neutral01);
+  background: var(--AlertSuccess);
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
