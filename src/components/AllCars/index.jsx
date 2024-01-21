@@ -6,6 +6,7 @@ import * as formater from "../../helpers/formaters";
 import * as reqApi from "../../helpers/apis";
 import { getListCars } from "../../redux/actions/carsAction";
 import { TYPES } from "../../redux/type";
+import noImage from "../../assets/img/no-image.jpg";
 
 const AllCars = () => {
   const { car_list, isDelete, idCar } = useSelector(
@@ -30,7 +31,7 @@ const AllCars = () => {
       dispatch({
         type: TYPES.SUCCESS_DELETE,
         payload: {
-          deleteStatus: true,
+          deleteStatus: false,
         },
       });
       setTimeout(() => {
@@ -65,7 +66,7 @@ const AllCars = () => {
             <div key={id}>
               <CardCar
                 id={item.id}
-                img={item.image}
+                img={!item.image ? noImage : item.image}
                 price={formater.idrFormater(item.price)}
                 name={item.name}
                 capacity={categoryText}
