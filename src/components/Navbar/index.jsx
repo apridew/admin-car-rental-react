@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
 const Navbar = ({ main, submitSearch, resetSearch }) => {
   const { chooseSidebar, login } = useSelector((state) => state.loginReducer);
-  const { isSubmit, name_car } = useSelector((state) => state.carsReducer);
+  const { isSearch, name_car } = useSelector((state) => state.carsReducer);
   const [showSidebar, setshowSidebar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,6 +41,12 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
         name_car: e.target.value,
       },
     });
+    dispatch({
+      type: TYPES.IS_SEARCH,
+      payload: {
+        search: false,
+      },
+    });
     // console.log(e.target.value);
   };
 
@@ -73,7 +79,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
   return (
     <div id="navbar" className="container-fluid p-0">
       <div className="row wrapper-bar p-0 m-0 d-flex">
-        {/* START SIDEBAR*/}
+        {/* START SIDEBAR */}
         <div
           className={`col side-bar d-flex p-0 flex-grow-0 ${
             showSidebar ? "d-none" : ""
@@ -104,10 +110,10 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
             <button>{chooseSidebar ? "Dashboard" : "List Car"}</button>
           </div>
         </div>
-        {/* END SIDEBAR*/}
+        {/* END SIDEBAR */}
 
+        {/* START NAVBAR*/}
         <div className="col bar-content bg-body-secondary">
-          {/* START HEADER BAR*/}
           <div className="header-bar d-flex align-items-center justify-content-between bg-white gap-4">
             {showSidebar ? (
               <i className="bi bi-x" onClick={sidebarShow}></i>
@@ -126,7 +132,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                   className="ps-5"
                   value={name_car}
                 />
-                {isSubmit ? (
+                {isSearch ? (
                   <button
                     onClick={resetSearch}
                     className="btn btn-outline-danger border-danger fw-bold"
@@ -161,6 +167,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                       <a
                         onClick={handleLogout}
                         className="dropdown-item text-danger"
+                        role="button"
                       >
                         Sign Out
                         <i className="bi bi-box-arrow-right ps-2"></i>
@@ -168,19 +175,11 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                     </li>
                   </ul>
                 </div>
-                {/* <select
-                  name=""
-                  id=""
-                  className="border-0"
-                  onSelect={handleLogout}
-                >
-                  <option value="admin">Admin</option>
-                  <option value="logout">Log Out</option>
-                </select> */}
               </div>
             </div>
           </div>
-          {/* END HEADER BAR*/}
+          {/* END NAVBAR*/}
+
           <div className="content">
             {login && (
               <div className="card mb-3 text-danger bg-danger-subtle d-flex justify-content-center align-items-center p-2">

@@ -7,6 +7,7 @@ const carsState = {
   name_car: "",
   isSubmit: false,
   isDelete: false,
+  isSearch: false,
   successDelete: false,
   currentPage: 1,
   totalPage: null,
@@ -29,6 +30,11 @@ export const carsReducer = (state = carsState, action) => {
       return {
         ...state,
         isSubmit: action.payload.submit,
+      };
+    case TYPES.IS_SEARCH:
+      return {
+        ...state,
+        isSearch: action.payload.search,
       };
     case TYPES.IS_LOADING:
       return {
