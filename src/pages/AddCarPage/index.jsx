@@ -4,10 +4,9 @@ import "./style.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TYPES } from "../../redux/type";
 const AddCarPage = () => {
-  const { isSubmit } = useSelector((state) => state.carsReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -43,10 +42,10 @@ const AddCarPage = () => {
     };
 
     const formData = new FormData();
-    formData.set("name", form.name);
-    formData.set("price", form.price);
-    formData.set("category", form.category);
-    formData.set("image", image);
+    formData.append("name", form.name);
+    formData.append("price", form.price);
+    formData.append("category", form.category);
+    formData.append("image", image);
 
     axios
       .post(
@@ -56,6 +55,7 @@ const AddCarPage = () => {
       )
       .then((res) => {
         console.log(res);
+        navigate("/cars");
         dispatch({
           type: TYPES.IS_SUBMIT,
           payload: {
@@ -63,7 +63,6 @@ const AddCarPage = () => {
           },
         });
         setTimeout(() => {
-          navigate("/cars");
           dispatch({
             type: TYPES.IS_SUBMIT,
             payload: {
@@ -85,11 +84,7 @@ const AddCarPage = () => {
               <Breadcrumb.Item href="/cars">List Car</Breadcrumb.Item>
               <Breadcrumb.Item active>Add New Car</Breadcrumb.Item>
             </Breadcrumb>
-            {isSubmit && (
-              <div className="notification my-3">
-                <p className="m-0">Data Berhasil Disimpan</p>
-              </div>
-            )}
+
             <h1 className="fw-bold fs-5">Add New Car</h1>
             <div className="container-form">
               <div className="form-section bg-white p-3 gap-2 d-flex flex-column">

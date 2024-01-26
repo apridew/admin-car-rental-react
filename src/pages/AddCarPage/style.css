@@ -81,16 +81,3 @@
   background: var(--LimeGreen04) !important;
   border-radius: 2px;
 }
-
-.notification {
-  display: flex;
-  position: relative;
-  padding: 12px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  color: var(--Neutral01);
-  background: var(--AlertSuccess);
-  border-radius: 4px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-}
