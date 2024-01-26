@@ -4,11 +4,12 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
 import { updateCar } from "../../helpers/apis";
 const EditCarPage = () => {
   const { isLoading } = useSelector((state) => state.carsReducer);
+  const [isSave, setIsSave] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const param = useParams();
@@ -59,7 +60,7 @@ const EditCarPage = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const token = localStorage.getItem("accesToken");
 
     const config = {
@@ -74,31 +75,34 @@ const EditCarPage = () => {
     formData.append("category", form.category);
     formData.append("image", image);
 
-    axios
-      .put(
+    try {
+      const res = await axios.put(
         `https://api-car-rental.binaracademy.org/admin/car/${param.id}`,
         formData,
         config
-      )
-      .then((res) => {
-        console.log(res);
+      );
+      console.log(res);
+      setIsSave(true);
+      setTimeout(() => {
         navigate("/cars");
+      }, 500);
+      dispatch({
+        type: TYPES.IS_SUBMIT,
+        payload: {
+          submit: true,
+        },
+      });
+      setTimeout(() => {
         dispatch({
           type: TYPES.IS_SUBMIT,
           payload: {
-            submit: true,
+            submit: false,
           },
         });
-        setTimeout(() => {
-          dispatch({
-            type: TYPES.IS_SUBMIT,
-            payload: {
-              submit: false,
-            },
-          });
-        }, 2000);
-      })
-      .catch((err) => console.log(err));
+      }, 2000);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const carDetail = async () => {
@@ -161,7 +165,7 @@ const EditCarPage = () => {
                       <Col lg={4}>
                         <Form.Control
                           size="lg"
-                          type="text"
+                          type="number"
                           placeholder="Input Harga Sewa Mobil"
                           onChange={handleChange}
                           name="price"
@@ -216,7 +220,9 @@ const EditCarPage = () => {
                             name="category"
                             value={form.category}
                           >
-                            <option value="">Pilih Kategori Mobil</option>
+                            <option disabled value="">
+                              Pilih Kategori Mobil
+                            </option>
                             <option value="small">2 - 4 orang</option>
                             <option value="medium">4 - 6 orang</option>
                             <option value="large">6 - 8 orang</option>
@@ -246,18 +252,24 @@ const EditCarPage = () => {
                   <Link to={"/cars"}>
                     <Button
                       variant="outline-primary"
-                      className="cancel me-2 fw-bold rounded-0 bg-white"
+                      className="cancel me-2 fw-bold bg-white"
                     >
                       Cancel
                     </Button>
                   </Link>
                   <Button
-                    className="save fw-bold rounded-0"
+                    className="save fw-bold"
                     style={{ backgroundColor: "#0D28A6" }}
                     onClick={handleSubmit}
-                    disabled={!isFormEdited}
+                    disabled={!isFormEdited || isSave}
                   >
-                    Save
+                    {isSave ? (
+                      <div className="spinner-border cars" role="status">
+                        <span className="visually-hidden"></span>
+                      </div>
+                    ) : (
+                      "Save"
+                    )}
                   </Button>
                 </div>
               </div>

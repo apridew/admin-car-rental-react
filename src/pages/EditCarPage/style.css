@@ -62,31 +62,3 @@
 .imageLabel {
   overflow: hidden;
 }
-
-.button-submit {
-  position: relative;
-  top: 20px;
-}
-
-.button-submit .cancel {
-  color: var(--DarkBlue04);
-  background: transparent;
-  border-radius: 2px;
-
-  &:hover {
-    border-color: var(--AlertDanger) !important;
-    color: var(--AlertDanger) !important;
-    background: var(--Neutral01) !important;
-  }
-}
-
-.button-submit .save:hover {
-  border-color: var(--LimeGreen04);
-  background: var(--LimeGreen04) !important;
-  border-radius: 2px;
-}
-
-.save:disabled {
-  background-color: var(--DarkBlue01) !important;
-  border-color: var(--DarkBlue01) !important;
-}
