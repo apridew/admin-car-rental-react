@@ -11,7 +11,6 @@ const carsState = {
   successDelete: false,
   currentPage: 1,
   totalPage: null,
-  countAllCars: null,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -57,7 +56,6 @@ export const carsReducer = (state = carsState, action) => {
         ...state,
         currentPage: action.payload.currentPage,
         totalPage: action.payload.totalPage,
-        countAllCars: action.payload.countAllCars,
       };
 
     default:

@@ -23,7 +23,6 @@ export const getListCars =
         payload: {
           currentPage: res.data.page,
           totalPage: res.data.pageCount,
-          countAllCars: res.data.count,
         },
       });
     } catch (error) {
