@@ -33,3 +33,7 @@ export const categoryTextFormater = (category) => {
   }
   return categoryText;
 };
+
+export const scrollTop = () => {
+  return window.scrollTo(0, 0);
+};

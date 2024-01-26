@@ -24,6 +24,7 @@ const AllCars = () => {
   };
 
   const handleDialogYes = async () => {
+    formater.scrollTop();
     try {
       const res = await reqApi.deleteCar(idCar);
       dispatch(getListCars("", "", "", 9));
