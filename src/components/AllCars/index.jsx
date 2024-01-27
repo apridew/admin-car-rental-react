@@ -6,9 +6,10 @@ import * as formater from "../../helpers/formaters";
 import * as reqApi from "../../helpers/apis";
 import { getListCars } from "../../redux/actions/carsAction";
 import { TYPES } from "../../redux/type";
+import noImage from "../../assets/img/no-image.jpg";
 
 const AllCars = () => {
-  const { car_list, isDelete, idCar } = useSelector(
+  const { car_list, isDelete, idCar, isLoading } = useSelector(
     (state) => state.carsReducer
   );
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const AllCars = () => {
   };
 
   const handleDialogYes = async () => {
+    formater.scrollTop();
     try {
       const res = await reqApi.deleteCar(idCar);
       dispatch(getListCars("", "", "", 9));
@@ -33,13 +35,13 @@ const AllCars = () => {
           deleteStatus: true,
         },
       });
+      dispatch({
+        type: TYPES.IS_DELETE,
+        payload: {
+          delete: false,
+        },
+      });
       setTimeout(() => {
-        dispatch({
-          type: TYPES.IS_DELETE,
-          payload: {
-            delete: false,
-          },
-        });
         dispatch({
           type: TYPES.SUCCESS_DELETE,
           payload: {
@@ -55,7 +57,15 @@ const AllCars = () => {
     <div className="list-all-card">
       {!car_list.length ? (
         <div className="notif-no-data d-flex justify-content-center align-items-center">
-          <h1>Mobil belum tersedia</h1>
+          {isLoading ? (
+            <div className="wrapper-spinner">
+              <div className="spinner-border tex" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            </div>
+          ) : (
+            <h1>Mobil belum tersedia</h1>
+          )}
         </div>
       ) : (
         car_list.map((item, id) => {
@@ -65,7 +75,7 @@ const AllCars = () => {
             <div key={id}>
               <CardCar
                 id={item.id}
-                img={item.image}
+                img={!item.image ? noImage : item.image}
                 price={formater.idrFormater(item.price)}
                 name={item.name}
                 capacity={categoryText}

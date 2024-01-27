@@ -11,8 +11,15 @@ import AllCars from "../../components/AllCars";
 import PaginationCars from "../../components/Pagination";
 
 const CarsPage = () => {
-  const { isLoading, name_car, currentPage, totalPage, countAllCars } =
-    useSelector((state) => state.carsReducer);
+  const {
+    isLoading,
+    isSubmit,
+    name_car,
+    currentPage,
+    totalPage,
+    car_list,
+    successDelete,
+  } = useSelector((state) => state.carsReducer);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,20 +42,20 @@ const CarsPage = () => {
 
   console.log("Page :", currentPage, "Total Page :", totalPage);
   const submitSearch = () => {
-    dispatch(getListCars(name_car, category, currentPage, ""));
+    dispatch(getListCars(name_car, category, 1, ""));
     dispatch({
-      type: TYPES.IS_SUBMIT,
+      type: TYPES.IS_SEARCH,
       payload: {
-        submit: true,
+        search: true,
       },
     });
   };
 
   const resetSearch = () => {
     dispatch({
-      type: TYPES.IS_SUBMIT,
+      type: TYPES.IS_SEARCH,
       payload: {
-        submit: false,
+        search: false,
       },
     });
     dispatch({
@@ -111,6 +118,20 @@ const CarsPage = () => {
             </div>
           ) : (
             <div id="cars-page">
+              {successDelete && (
+                <div className="wrapper-notif">
+                  <div className="notification-delete">
+                    <p className="m-0">Data Berhasil Dihapus</p>
+                  </div>
+                </div>
+              )}
+              {isSubmit && (
+                <div className="wrapper-notif">
+                  <div className="notification">
+                    <p className="m-0">Data Berhasil Disimpan</p>
+                  </div>
+                </div>
+              )}
               <Breadcrumb>
                 <Breadcrumb.Item href="/">Cars</Breadcrumb.Item>
                 <Breadcrumb.Item active>List Car</Breadcrumb.Item>
@@ -152,7 +173,7 @@ const CarsPage = () => {
               <div className="bottom-cars d-flex justify-content-between align-items-center">
                 <PaginationCars name_car={name_car} category={category} />
                 <p className="m-0 fw-bold d-flex align-items-center gap-3">
-                  Total Cars : {countAllCars}
+                  Total Cars : {car_list.length ? car_list.length : "0"}
                   <a>|</a>
                   <a href="#">
                     <i className="bi bi-arrow-up-circle fs-4"></i>

@@ -4,7 +4,9 @@ import { getListCars } from "../../redux/actions/carsAction";
 
 const PaginationCars = ({ category, name_car }) => {
   const dispatch = useDispatch();
-  const { totalPage, currentPage } = useSelector((state) => state.carsReducer);
+  const { totalPage, currentPage, car_list } = useSelector(
+    (state) => state.carsReducer
+  );
   const paginationNext = () => {
     const newCurrentPage = currentPage + 1;
     if (currentPage < totalPage) {
@@ -37,31 +39,37 @@ const PaginationCars = ({ category, name_car }) => {
   };
   return (
     <>
-      <div className="pagination mt-3">
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li className="page-item" onClick={paginationBack}>
-              <a
-                className={`page-link ${currentPage === 1 ? " disabled" : ""}`}
-                aria-label="Previous"
-              >
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            {renderPaginationNumber()}
-            <li className="page-item" onClick={paginationNext}>
-              <a
-                className={`page-link ${
-                  currentPage === totalPage ? " disabled" : ""
-                }`}
-                aria-label="Next"
-              >
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      {car_list.length ? (
+        <div className="pagination mt-3">
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item" onClick={paginationBack}>
+                <a
+                  className={`page-link ${
+                    currentPage === 1 ? " disabled" : ""
+                  }`}
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {renderPaginationNumber()}
+              <li className="page-item" onClick={paginationNext}>
+                <a
+                  className={`page-link ${
+                    currentPage === totalPage ? " disabled" : ""
+                  }`}
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

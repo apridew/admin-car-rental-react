@@ -1,16 +1,15 @@
 import axios from "axios";
 
-// const token = localStorage.getItem("accesToken");
+const token = localStorage.getItem("accesToken");
+const config = {
+  headers: {
+    access_token: token,
+  },
+};
+
+// API Get Cars
 export const getCars = async (name, category, page, totalPage) => {
-  const token = localStorage.getItem("accesToken");
-
   try {
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-
     const response = await axios.get(
       `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=${page}&pageSize=${totalPage}`,
       config
@@ -24,16 +23,9 @@ export const getCars = async (name, category, page, totalPage) => {
   }
 };
 
+// API Delete Car
 export const deleteCar = async (id) => {
-  const token = localStorage.getItem("accesToken");
-
   try {
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-
     const response = await axios.delete(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
       config
@@ -45,16 +37,10 @@ export const deleteCar = async (id) => {
     return error.response.data.message;
   }
 };
+
+// API Edit Car
 export const updateCar = async (id) => {
-  const token = localStorage.getItem("accesToken");
-
   try {
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-
     const response = await axios.get(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
       config
@@ -64,7 +50,6 @@ export const updateCar = async (id) => {
 
     return response;
   } catch (error) {
-    //
     return error.response.data.message;
   }
 };

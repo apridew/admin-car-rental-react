@@ -7,10 +7,10 @@ const carsState = {
   name_car: "",
   isSubmit: false,
   isDelete: false,
+  isSearch: false,
   successDelete: false,
   currentPage: 1,
   totalPage: null,
-  countAllCars: null,
 };
 
 export const carsReducer = (state = carsState, action) => {
@@ -29,6 +29,11 @@ export const carsReducer = (state = carsState, action) => {
       return {
         ...state,
         isSubmit: action.payload.submit,
+      };
+    case TYPES.IS_SEARCH:
+      return {
+        ...state,
+        isSearch: action.payload.search,
       };
     case TYPES.IS_LOADING:
       return {
@@ -51,7 +56,6 @@ export const carsReducer = (state = carsState, action) => {
         ...state,
         currentPage: action.payload.currentPage,
         totalPage: action.payload.totalPage,
-        countAllCars: action.payload.countAllCars,
       };
 
     default:
