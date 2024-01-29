@@ -3,6 +3,7 @@ import { TYPES } from "../type";
 const loginState = {
   login: false,
   chooseSidebar: true,
+  error: false,
 };
 
 export const loginReducer = (state = loginState, action) => {
@@ -16,6 +17,11 @@ export const loginReducer = (state = loginState, action) => {
       return {
         ...state,
         chooseSidebar: action.payload.sidebar,
+      };
+    case TYPES.IS_ERROR:
+      return {
+        ...state,
+        error: action.payload.error,
       };
 
     default:

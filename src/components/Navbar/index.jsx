@@ -73,7 +73,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
           data: false,
         },
       });
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -182,7 +182,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
 
           <div className="content">
             {login && (
-              <div className="card mb-3 text-danger bg-danger-subtle d-flex justify-content-center align-items-center p-2">
+              <div className="card mb-3 text-danger bg-danger-subtle d-flex justify-content-center align-items-center p-2 border-0">
                 <p className="m-0">Berhasil Sign Out</p>
                 <div className="spinner-border" role="status">
                   <span className="visually-hidden"></span>

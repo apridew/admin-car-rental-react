@@ -1,15 +1,13 @@
+import "./style.css";
 import Navbar from "../../components/Navbar";
 import { Breadcrumb, Col, Row, Form, Button } from "react-bootstrap";
-import "./style.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
-import { updateCar } from "../../helpers/apis";
+import { detailCar, editCar } from "../../helpers/apis";
 const EditCarPage = () => {
   const { isLoading } = useSelector((state) => state.carsReducer);
-  const [isSave, setIsSave] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const param = useParams();
@@ -20,17 +18,17 @@ const EditCarPage = () => {
     category: "",
   });
 
+  const [isSave, setIsSave] = useState(false);
   const [imageURL, setImageURL] = useState(null);
   const [image, setImage] = useState(imageURL);
-  // const [imagePreview, setImagePreview] = useState(imageURL);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [nameImage, setNameImage] = useState("");
+  const [imageSize, setImageSize] = useState(0);
 
   useEffect(() => {
     carDetail();
-    // convertUrlToBinary();
-    console.log(imageURL);
   }, []);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -38,36 +36,23 @@ const EditCarPage = () => {
       [name]: value,
     });
     !image ? setImage(imageURL) : setImage(image);
-    setIsFormEdited(true);
+    // setIsFormEdited(true);
   };
 
   const handleImage = (event) => {
     const uploadedImage = event.target.files[0];
-    setImage(uploadedImage);
-    // setImagePreview(URL.createObjectURL(uploadedImage));
-    setNameImage(uploadedImage.name);
-    setIsFormEdited(true);
-  };
+    setImageSize(uploadedImage.size);
+    setNameImage("Upload Foto Mobil");
 
-  const convertUrlToBinary = async () => {
-    try {
-      const response = await fetch(imageURL, { mode: "no-cors" });
-      const arrayBuffer = await response.arrayBuffer();
-
-      setImageURL(arrayBuffer);
-    } catch (error) {
-      console.error("Error converting image URL to binary:", error.response);
+    if (uploadedImage.size < 2000000) {
+      setIsFormEdited(true);
+      setNameImage(uploadedImage.name);
+      setImage(uploadedImage);
     }
   };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("accesToken");
-
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
+    setIsSave(true);
 
     const formData = new FormData();
     formData.append("name", form.name);
@@ -76,13 +61,9 @@ const EditCarPage = () => {
     formData.append("image", image);
 
     try {
-      const res = await axios.put(
-        `https://api-car-rental.binaracademy.org/admin/car/${param.id}`,
-        formData,
-        config
-      );
+      const res = await editCar(formData, param.id);
       console.log(res);
-      setIsSave(true);
+
       setTimeout(() => {
         navigate("/cars");
       }, 500);
@@ -107,7 +88,7 @@ const EditCarPage = () => {
 
   const carDetail = async () => {
     try {
-      const res = await updateCar(param.id);
+      const res = await detailCar(param.id);
       setForm(res.data);
       setImageURL(res.data.image);
       dispatch({
@@ -183,7 +164,6 @@ const EditCarPage = () => {
                             accept="image/*"
                             type="file"
                             id="uploadBtn"
-                            size="2097152"
                             onChange={handleImage}
                           />
                           <label
@@ -201,11 +181,11 @@ const EditCarPage = () => {
                         <p className="text-secondary mt-2">
                           File size max. 2MB
                         </p>
-                        {/* <img
-                      style={{ width: "100%", borderRadius: "10px" }}
-                      src={!image ? imageURL : imagePreview}
-                      alt="preview image"
-                    /> */}
+                        {imageSize > 2000000 && (
+                          <p className="text-danger p-2 fw-semibold text-center z-0 bg-danger-subtle rounded-2">
+                            Image size must be less than 2MB
+                          </p>
+                        )}
                       </Col>
                     </Row>
                     <Row className="pb-2">

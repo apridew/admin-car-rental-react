@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { TYPES } from "../../redux/type";
 
 const SignInPage = () => {
-  const { login } = useSelector((state) => state.loginReducer);
+  const { login, error } = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -14,18 +14,18 @@ const SignInPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUsername = (e) => {
     console.log(e.target.value);
     setEmail(e.target.value);
-    setError("");
+    setErrorMessage("");
   };
 
   const handlePassword = (e) => {
     console.log(e.target.value);
     setPassword(e.target.value);
-    setError("");
+    setErrorMessage("");
   };
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const SignInPage = () => {
     };
 
     if (!email || !password) {
-      setError("Password dan Email harus diisi");
+      setErrorMessage("Password dan Email harus diisi");
       return;
     }
 
@@ -64,12 +64,26 @@ const SignInPage = () => {
             data: false,
           },
         });
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.log(error.response.data);
-      setError(
-        "Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital."
-      );
+      dispatch({
+        type: TYPES.IS_ERROR,
+        payload: {
+          error: true,
+        },
+      });
+      setTimeout(() => {
+        dispatch({
+          type: TYPES.IS_ERROR,
+          payload: {
+            error: false,
+          },
+        });
+        setErrorMessage(
+          "Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital."
+        );
+      }, 500);
     }
   };
 
@@ -82,13 +96,13 @@ const SignInPage = () => {
           <div className="login-detail">
             <h1>Welcome, Admin BCR</h1>
 
-            {error && <p className="login-error">{error}</p>}
+            {errorMessage && <p className="login-error">{errorMessage}</p>}
             {login && <p className="login-success">Sign in berhasil</p>}
 
             <div className="login-input">
               <label htmlFor="email">Email</label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 placeholder="Contoh: binar@gmail.com"
                 onChange={handleUsername}
@@ -102,8 +116,8 @@ const SignInPage = () => {
                 onChange={handlePassword}
               />
             </div>
-            <button disabled={login} onClick={handleSubmit}>
-              {login ? (
+            <button disabled={login || error} onClick={handleSubmit}>
+              {login || error ? (
                 <div className="spinner-border" role="status">
                   <span className="visually-hidden"></span>
                 </div>
