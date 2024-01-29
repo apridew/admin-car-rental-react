@@ -1,6 +1,7 @@
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getListCars } from "../../redux/actions/carsAction";
+import { scrollTop } from "../../helpers/formaters";
 
 const PaginationCars = ({ category, name_car }) => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const PaginationCars = ({ category, name_car }) => {
   const paginationNext = () => {
     const newCurrentPage = currentPage + 1;
     if (currentPage < totalPage) {
+      scrollTop();
       dispatch(getListCars({ name_car }, { category }, newCurrentPage, 4));
     }
   };
@@ -17,11 +19,13 @@ const PaginationCars = ({ category, name_car }) => {
   const paginationBack = () => {
     const newCurrentPage = currentPage - 1;
     if (currentPage > 1) {
+      scrollTop();
       dispatch(getListCars({ name_car }, { category }, newCurrentPage, 4));
     }
   };
 
   const renderPaginationNumber = () => {
+    scrollTop();
     const numberPage = [];
     for (let i = 1; i <= totalPage; i++) {
       numberPage.push(

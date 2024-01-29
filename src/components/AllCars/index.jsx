@@ -9,7 +9,7 @@ import { TYPES } from "../../redux/type";
 import noImage from "../../assets/img/no-image.jpg";
 
 const AllCars = () => {
-  const { car_list, isDelete, idCar, isLoading } = useSelector(
+  const { car_list, isDelete, idCar } = useSelector(
     (state) => state.carsReducer
   );
   const dispatch = useDispatch();
@@ -57,15 +57,7 @@ const AllCars = () => {
     <div className="list-all-card">
       {!car_list.length ? (
         <div className="notif-no-data d-flex justify-content-center align-items-center">
-          {isLoading ? (
-            <div className="wrapper-spinner">
-              <div className="spinner-border tex" role="status">
-                <span className="visually-hidden"></span>
-              </div>
-            </div>
-          ) : (
-            <h1>Mobil belum tersedia</h1>
-          )}
+          <h1>Mobil belum tersedia</h1>
         </div>
       ) : (
         car_list.map((item, id) => {

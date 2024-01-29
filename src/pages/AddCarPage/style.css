@@ -19,7 +19,7 @@
   color: red;
 }
 
-.form-section p:first-of-type {
+.form-section p {
   font-size: 10px;
 }
 .form-upload-file {

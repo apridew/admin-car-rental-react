@@ -16,7 +16,7 @@ const CarsPage = () => {
     isSubmit,
     name_car,
     currentPage,
-    totalPage,
+    isSearch,
     car_list,
     successDelete,
   } = useSelector((state) => state.carsReducer);
@@ -24,25 +24,23 @@ const CarsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState("");
   const [allClicked, setAllClicked] = useState(true);
   const [smallClicked, setSmallClicked] = useState(false);
   const [mediumClicked, setMediumClicked] = useState(false);
   const [largeClicked, setLargeClicked] = useState(false);
 
   useEffect(() => {
-    dispatch(getListCars(name_car, category, currentPage, 9));
+    dispatch(getListCars("", "", currentPage, 9));
     dispatch({
       type: TYPES.CHOOSE_SIDEBAR,
       payload: {
         sidebar: false,
       },
     });
-  }, [category, currentPage]);
+  }, [currentPage]);
 
-  console.log("Page :", currentPage, "Total Page :", totalPage);
   const submitSearch = () => {
-    dispatch(getListCars(name_car, category, 1, ""));
+    dispatch(getListCars(name_car, "", 1, ""));
     dispatch({
       type: TYPES.IS_SEARCH,
       payload: {
@@ -72,36 +70,23 @@ const CarsPage = () => {
     setLargeClicked(false);
   };
 
-  const chooseCategory = (selected) => {
-    setCategory(selected);
-    setAllClicked(true);
-    setSmallClicked(false);
-    setMediumClicked(false);
-    setLargeClicked(false);
-  };
-
-  const chooseCategorySmall = (selected) => {
-    setCategory(selected);
-    setAllClicked(false);
-    setSmallClicked(true);
-    setMediumClicked(false);
-    setLargeClicked(false);
-  };
-
-  const chooseCategoryMedium = (selected) => {
-    setCategory(selected);
-    setAllClicked(false);
-    setSmallClicked(false);
-    setMediumClicked(true);
-    setLargeClicked(false);
-  };
-
-  const chooseCategoryLarge = (selected) => {
-    setCategory(selected);
-    setAllClicked(false);
-    setSmallClicked(false);
-    setMediumClicked(false);
-    setLargeClicked(true);
+  const chooseCategory = (
+    selected,
+    small = false,
+    medium = false,
+    large = false
+  ) => {
+    dispatch(getListCars(name_car, selected, 1, small ? "" : 9));
+    dispatch({
+      type: TYPES.IS_SEARCH,
+      payload: {
+        search: true,
+      },
+    });
+    setAllClicked(!small && !medium && !large);
+    setSmallClicked(small);
+    setMediumClicked(medium);
+    setLargeClicked(large);
   };
 
   return (
@@ -146,33 +131,45 @@ const CarsPage = () => {
               <div className="button-search mb-4">
                 <ButtonSearch
                   name={""}
-                  handleClick={() => chooseCategory("")}
+                  handleClick={() => chooseCategory("", false, false, false)}
                   text={"All"}
                   style={allClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"small"}
-                  handleClick={() => chooseCategorySmall("small")}
+                  handleClick={() => chooseCategory("small", true)}
                   text={"2 - 4 people"}
                   style={smallClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"medium"}
-                  handleClick={() => chooseCategoryMedium("medium")}
+                  handleClick={() => chooseCategory("medium", false, true)}
                   text={"4 - 6 people"}
                   style={mediumClicked ? "clicked" : ""}
                 />
                 <ButtonSearch
                   name={"large"}
-                  handleClick={() => chooseCategoryLarge("large")}
+                  handleClick={() =>
+                    chooseCategory("large", false, false, true)
+                  }
                   text={"6 - 8 people"}
                   style={largeClicked ? "clicked" : ""}
                 />
               </div>
-              <AllCars />
+              {isLoading ? (
+                <div className="wrapper-spinner">
+                  <div className="spinner-border tex" role="status">
+                    <span className="visually-hidden"></span>
+                  </div>
+                </div>
+              ) : (
+                <AllCars />
+              )}
               <div className="bottom-cars d-flex justify-content-between align-items-center">
-                <PaginationCars name_car={name_car} category={category} />
-                <p className="m-0 fw-bold d-flex align-items-center gap-3">
+                {!isSearch && (
+                  <PaginationCars name_car={name_car} category={""} />
+                )}
+                <p className="m-0 fw-bold d-flex align-items-center gap-3 py-3">
                   Total Cars : {car_list.length ? car_list.length : "0"}
                   <a>|</a>
                   <a href="#">

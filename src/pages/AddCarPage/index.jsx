@@ -1,16 +1,14 @@
+import "./style.css";
 import Navbar from "../../components/Navbar";
 import { Breadcrumb, Col, Row, Form, Button } from "react-bootstrap";
-import "./style.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { TYPES } from "../../redux/type";
+import { addCar } from "../../helpers/apis";
 const AddCarPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isSave, setIsSave] = useState(false);
-  const [isFormEdited, setIsFormEdited] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -18,8 +16,12 @@ const AddCarPage = () => {
     category: "",
   });
 
+  const [isSave, setIsSave] = useState(false);
+  const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState(null);
   const [nameImage, setNameImage] = useState("");
+  const [imageSize, setImageSize] = useState(0);
+
   useEffect(() => {
     !(form.name && form.category && form.price && image)
       ? setIsFormEdited(false)
@@ -36,18 +38,17 @@ const AddCarPage = () => {
 
   const handleImage = (event) => {
     const uploadedImage = event.target.files[0];
-    setImage(uploadedImage);
-    setNameImage(uploadedImage.name);
+    setImageSize(uploadedImage.size);
+    setNameImage("Upload Foto Mobil");
+
+    if (uploadedImage.size < 2000000) {
+      setNameImage(uploadedImage.name);
+      setImage(uploadedImage);
+    }
   };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("accesToken");
     setIsSave(true);
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
 
     const formData = new FormData();
     formData.append("name", form.name);
@@ -56,12 +57,9 @@ const AddCarPage = () => {
     formData.append("image", image);
 
     try {
-      const res = await axios.post(
-        "https://api-car-rental.binaracademy.org/admin/car",
-        formData,
-        config
-      );
+      const res = await addCar(formData);
       console.log(res);
+
       setTimeout(() => {
         navigate("/cars");
       }, 500);
@@ -136,7 +134,6 @@ const AddCarPage = () => {
                         accept="image/*"
                         type="file"
                         id="uploadBtn"
-                        size="2097152"
                         onChange={handleImage}
                       />
                       <label
@@ -148,6 +145,11 @@ const AddCarPage = () => {
                       </label>
                     </div>
                     <p className="text-secondary mt-2">File size max. 2MB</p>
+                    {imageSize > 2000000 && (
+                      <p className="text-danger p-2 fw-semibold text-center z-0 bg-danger-subtle rounded-2">
+                        Image size must be less than 2MB
+                      </p>
+                    )}
                   </Col>
                 </Row>
                 <Row className="pb-2">

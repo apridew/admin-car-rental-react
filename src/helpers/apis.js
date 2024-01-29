@@ -23,6 +23,37 @@ export const getCars = async (name, category, page, totalPage) => {
   }
 };
 
+// API Detail Car
+export const detailCar = async (id) => {
+  try {
+    const response = await axios.get(
+      `https://api-car-rental.binaracademy.org/admin/car/${id}`,
+      config
+    );
+
+    console.log(response.data);
+
+    return response;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
+// API Add Car
+export const addCar = async (formData) => {
+  try {
+    const response = await axios.post(
+      "https://api-car-rental.binaracademy.org/admin/car",
+      formData,
+      config
+    );
+
+    return response;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
 // API Delete Car
 export const deleteCar = async (id) => {
   try {
@@ -33,20 +64,18 @@ export const deleteCar = async (id) => {
 
     return response;
   } catch (error) {
-    //
     return error.response.data.message;
   }
 };
 
 // API Edit Car
-export const updateCar = async (id) => {
+export const editCar = async (formData, id) => {
   try {
-    const response = await axios.get(
+    const response = await axios.put(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
+      formData,
       config
     );
-
-    console.log(response.data);
 
     return response;
   } catch (error) {
