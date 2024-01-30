@@ -25,3 +25,21 @@ export const formatDate = (dateString) => {
   const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
   return formattedDate;
 };
+
+export const categoryTextFormater = (category) => {
+  let categoryText = "";
+  if (category === "small") {
+    categoryText = "2 - 4 people";
+  } else if (category === "medium") {
+    categoryText = "4 - 6 people";
+  } else if (category === "large") {
+    categoryText = "6 - 8 people";
+  } else {
+    categoryText = "Undefined";
+  }
+  return categoryText;
+};
+
+export const scrollTop = () => {
+  return window.scrollTo(0, 0);
+}

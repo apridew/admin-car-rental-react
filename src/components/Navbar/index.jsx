@@ -5,8 +5,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { TYPES } from "../../redux/type";
 const Navbar = ({ main, submitSearch, resetSearch }) => {
-  const { chooseSidebar } = useSelector((state) => state.loginReducer);
-  const { isSubmit, name_car } = useSelector((state) => state.carsReducer);
+  const { chooseSidebar, login } = useSelector((state) => state.loginReducer);
+  const { isSearch, name_car } = useSelector((state) => state.carsReducer);
   const [showSidebar, setshowSidebar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,19 +41,51 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
         name_car: e.target.value,
       },
     });
+    dispatch({
+      type: TYPES.IS_SEARCH,
+      payload: {
+        search: false,
+      },
+    });
     // console.log(e.target.value);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accesToken");
+    dispatch({
+      type: TYPES.SET_LOGIN,
+      payload: {
+        data: true,
+      },
+    });
+
+    setTimeout(() => {
+      navigate("/sign-in");
+      dispatch({
+        type: TYPES.CHOOSE_SIDEBAR,
+        payload: {
+          sidebar: true,
+        },
+      });
+      dispatch({
+        type: TYPES.SET_LOGIN,
+        payload: {
+          data: false,
+        },
+      });
+    }, 1000);
   };
 
   return (
     <div id="navbar" className="container-fluid p-0">
       <div className="row wrapper-bar p-0 m-0 d-flex">
-        {/* START SIDEBAR*/}
+        {/* START SIDEBAR */}
         <div
           className={`col side-bar d-flex p-0 flex-grow-0 ${
             showSidebar ? "d-none" : ""
           }`}
         >
-          <div className="side-bar-left d-flex flex-column">
+          <div className="side-bar-left d-flex flex-column fixed-top">
             <div className="logo d-flex justify-content-center p-2 align-items-center">
               <img className="w-50 h-50" src={logo} alt="logo" />
             </div>
@@ -78,10 +110,10 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
             <button>{chooseSidebar ? "Dashboard" : "List Car"}</button>
           </div>
         </div>
-        {/* END SIDEBAR*/}
+        {/* END SIDEBAR */}
 
+        {/* START NAVBAR*/}
         <div className="col bar-content bg-body-secondary">
-          {/* START HEADER BAR*/}
           <div className="header-bar d-flex align-items-center justify-content-between bg-white gap-4">
             {showSidebar ? (
               <i className="bi bi-x" onClick={sidebarShow}></i>
@@ -100,7 +132,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                   className="ps-5"
                   value={name_car}
                 />
-                {isSubmit ? (
+                {isSearch ? (
                   <button
                     onClick={resetSearch}
                     className="btn btn-outline-danger border-danger fw-bold"
@@ -117,15 +149,48 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                 )}
               </div>
               <div className="user-profile d-flex align-items-center gap-2">
-                <a className="avatar">U</a>
-                <select name="" id="" className="border-0" disabled>
-                  <option value="">Unis Badri</option>
-                </select>
+                <a className="avatar">A</a>
+                <div className="dropdown">
+                  <button
+                    className="btn border-0 dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Admin
+                  </button>
+                  <ul className="dropdown-menu mt-1">
+                    <li>
+                      <a className="dropdown-item">Profile</a>
+                    </li>
+                    <li>
+                      <a
+                        onClick={handleLogout}
+                        className="dropdown-item text-danger"
+                        role="button"
+                      >
+                        Sign Out
+                        <i className="bi bi-box-arrow-right ps-2"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          {/* END HEADER BAR*/}
-          <div className="content">{main}</div>
+          {/* END NAVBAR*/}
+
+          <div className="content">
+            {login && (
+              <div className="card mb-3 text-danger bg-danger-subtle d-flex justify-content-center align-items-center p-2 border-0">
+                <p className="m-0">Berhasil Sign Out</p>
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden"></span>
+                </div>
+              </div>
+            )}
+            {main}
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,98 @@
+.breadcrumb-item a {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.breadcrumb-item {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  font-weight: bolder;
+  content: var(--bs-breadcrumb-divider, ">") !important;
+}
+
+.container-form span {
+  color: red;
+}
+
+.form-section p {
+  font-size: 10px;
+}
+.form-upload-file {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.form-upload-file input[type="file"] {
+  display: none;
+}
+
+.form-upload-file label {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651);
+}
+
+.form-category option,
+.form-category select {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651) !important;
+}
+
+.form-category {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.button-submit {
+  position: relative;
+  top: 20px;
+}
+
+.button-submit .save,
+.button-submit .cancel {
+  border-radius: 2px !important;
+}
+
+.button-submit .cancel {
+  color: var(--DarkBlue04);
+  background: transparent;
+
+  &:hover {
+    border-color: var(--AlertDanger) !important;
+    color: var(--AlertDanger) !important;
+    background: var(--Neutral01) !important;
+  }
+}
+
+.button-submit .save:hover {
+  border-color: var(--LimeGreen04);
+  background: var(--LimeGreen04) !important;
+  border-radius: 2px;
+}
+
+.save:disabled {
+  background-color: var(--DarkBlue01) !important;
+  border-color: var(--DarkBlue01) !important;
+}
+
+.spinner-border.cars {
+  --bs-spinner-width: 1rem;
+  --bs-spinner-height: 1rem;
+  margin: 2px 16px;
+}

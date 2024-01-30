@@ -1,0 +1,64 @@
+.breadcrumb-item a {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bolder;
+}
+.breadcrumb-item {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  font-weight: bolder;
+  content: var(--bs-breadcrumb-divider, ">") !important;
+}
+
+.container-form span {
+  color: red;
+}
+
+.form-section p:first-of-type {
+  font-size: 10px;
+}
+.form-upload-file {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.form-upload-file input[type="file"] {
+  display: none;
+}
+
+.form-upload-file label {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651);
+}
+
+.form-category option,
+.form-category select {
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.651) !important;
+}
+
+.form-category {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px;
+}
+
+.imageLabel {
+  overflow: hidden;
+}
