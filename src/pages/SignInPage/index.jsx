@@ -49,21 +49,6 @@ const SignInPage = () => {
       localStorage.setItem('accesToken', ress.data.access_token);
       console.log(ress.data);
 
-  //         dispatch({
-  //             type: "SET_LOGIN",
-  //             payload: {
-  //                 data: true
-  //             }
-  //         })
-
-  //         navigate("/")
-  //     } catch (error) {
-  //         console.log(error.response.data);
-  //         setError("Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.")
-  //     }
-
-  // }
-
       dispatch({
         type: TYPES.SET_LOGIN,
         payload: {

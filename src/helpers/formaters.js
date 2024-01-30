@@ -19,3 +19,9 @@ export const dateFormater = (inputDate) => {
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(date);
   return formattedDate.replace(/\//g, "-").replace(",", ", ");
 };
+
+export const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+  return formattedDate;
+};

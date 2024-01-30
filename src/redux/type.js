@@ -5,4 +5,5 @@ export const TYPES = {
     NAME_CAR: 'NAME_CAR',
     IS_SUBMIT: 'IS_SUBMIT',
     IS_LOADING: 'IS_LOADING',
+    ALL_ORDER: 'TYPE.SET_ORDER'
   };
