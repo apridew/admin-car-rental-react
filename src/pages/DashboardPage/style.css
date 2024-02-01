@@ -129,11 +129,11 @@ ul {
     border: 1px solid #D0D0D0 !important;
 }
 
-#navbar input {
+#dashboard input {
     border: none;
 }
 
-#navbar select {
+#dashboard select {
     border: 1px solid #D0D0D0;
 }
 
