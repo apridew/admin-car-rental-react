@@ -131,6 +131,7 @@ ul {
 
 #dashboard input {
   border: none;
+  height: 23px;
 }
 
 #dashboard select {
