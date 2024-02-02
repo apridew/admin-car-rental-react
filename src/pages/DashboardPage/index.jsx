@@ -145,24 +145,11 @@ const DashboardPage = () => {
   }, [])
 
 
-  const costumSortFunction = (rows, sortField, sortDirection) => {
-    return rows.slice().sort((a, b) => {
-      if (sortField === 'No') {
-        const valueA = a.index;
-        const valueB = b.index;
-        return sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
-      }
-
-      return 0;
-    })
-  }
-
   const columns = [
     {
       name: 'No',
-      selector: (row, index) => `${(orders.page - 1) * orders.pageSize + index + 1}`,
+      selector: (row) => row.id - 1,
       sortable: true,
-      // sortFunction: (rowA, rowB) => rowA.id - rowB.id,
 
     },
     {
@@ -300,10 +287,9 @@ const DashboardPage = () => {
                     <DataTable
                       columns={columns}
                       data={orders.orders}
-                      costumSortFunction={costumSortFunction}
                       customStyles={customStyles}
                       sortIcon={<UnfoldMoreIcon />}
-                      defaultSortFieldId='No'
+                      defaultSortFieldId="No"
                     >
                     </DataTable>
                   </div>
@@ -336,8 +322,8 @@ const DashboardPage = () => {
                       nextLabel="&raquo;"
                       pageCount={orders.pageCount}
                       // pageRangeDisplayed={}
-                      // marginPagesDisplayed={2}
-                      // breakLabel="..."
+                      marginPagesDisplayed={(2 , 1)}
+                      breakLabel="..."
                       onPageChange={handlePageClick}
                       containerClassName={'pagination'}
                       pageClassName={'page-item'}

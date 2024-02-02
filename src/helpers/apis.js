@@ -92,8 +92,10 @@ export const getAllOrder = async ({ selected, limit }) => {
     }
   }
 
+  const sortParam = ' created_at:asc&user_email:desc';
+
   const ress = await axios.get(
-    `https://api-car-rental.binaracademy.org/admin/v2/order?page=${selected + 1}&pageSize=${limit}`, config
+    `https://api-car-rental.binaracademy.org/admin/v2/order?sort=${sortParam}&page=${selected + 1}&pageSize=${limit}`, config
   )
 
   return ress
