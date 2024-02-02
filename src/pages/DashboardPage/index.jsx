@@ -137,7 +137,7 @@ const DashboardPage = () => {
         labels: newLabels,
         datasets: [
           {
-            label: "orderCount",
+            label: "Total Order",
             data: ress.data.map((item) => item.orderCount),
             backgroundColor: "#586B90",
           },
