@@ -127,18 +127,28 @@ ul {
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
   .MuiOutlinedInput-notchedOutline {
   border: 1px solid #d0d0d0 !important;
+  background: white !important;
 }
 
 #dashboard input {
   border: none;
+  height: 23px;
+  width: 122px;
+  background: white;
 }
 
 #dashboard select {
   border: 1px solid #d0d0d0;
 }
 
+.css-1bn53lx {
+  background: white;
+  width: 160px;
+}
+
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
   background-color: #f4f5f7 !important;
+  background: white !important;
 }
 
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
