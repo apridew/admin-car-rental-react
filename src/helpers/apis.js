@@ -83,20 +83,16 @@ export const editCar = async (formData, id) => {
   }
 };
 
+// API Get All Order
 export const getAllOrder = async ({ selected, limit }) => {
-  const token = localStorage.getItem('accesToken');
-
-  const config = {
-    headers: {
-      access_token: token,
-    }
-  }
-
-  const sortParam = ' created_at:asc&user_email:desc';
+  const sortParam = " created_at:asc&user_email:desc";
 
   const ress = await axios.get(
-    `https://api-car-rental.binaracademy.org/admin/v2/order?sort=${sortParam}&page=${selected + 1}&pageSize=${limit}`, config
-  )
+    `https://api-car-rental.binaracademy.org/admin/v2/order?sort=${sortParam}&page=${
+      selected + 1
+    }&pageSize=${limit}`,
+    config
+  );
 
-  return ress
-}
+  return ress;
+};
