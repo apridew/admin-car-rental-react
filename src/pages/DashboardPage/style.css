@@ -1,180 +1,180 @@
 * {
-    font-family: Arial;
+  font-family: Arial;
 }
 
 .dashboard {
-    margin: 10px;
+  margin: 10px;
 }
 
 .dashboard-row-1 {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .dashboard-chart {
-    width: 100%;
-    /* height: 376px; */
+  width: 100%;
+  /* height: 376px; */
 }
 
 .dashboard-title {
-    margin-top: 40px;
-    padding-right: 10px;
+  margin-top: 40px;
+  padding-right: 10px;
 }
 
 .dashboard-logo {
-    background-color: blue;
-    width: 4px;
-    height: 24px;
+  background-color: blue;
+  width: 4px;
+  height: 24px;
 }
 
 .dashboard-table {
-    display: grid;
-    width: 100%;
-    height: 80%;
-    grid-template-columns: 100% 1fr;
+  display: grid;
+  width: 100%;
+  height: 80%;
+  grid-template-columns: 100% 1fr;
 }
 
-.active>.page-link, .page-link.active {
-    background-color: #CFD4ED !important;
-    color: #0D28A6 !important;
+.active > .page-link,
+.page-link.active {
+  background-color: #cfd4ed !important;
+  color: #0d28a6 !important;
 }
 
 .dashboard-month {
-    display: flex;
-    /* padding: 8px 5px 8px 12px; */
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 21px;
-    border-radius: 2px 0px 0px 2px;
-    margin: 20px 0 ;
+  display: flex;
+  /* padding: 8px 5px 8px 12px; */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 21px;
+  border-radius: 2px 0px 0px 2px;
+  margin: 20px 0;
 }
 
-canvas{
-    width: 100% !important;
-    height: 450px !important;
+canvas {
+  width: 100% !important;
+  height: 450px !important;
 }
 
 .month-select {
-    display: flex;
-    padding: 8px 5px 8px 12px;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: 21px;
-    border: 1px solid #D0D0D0;
+  display: flex;
+  padding: 8px 5px 8px 12px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 21px;
+  border: 1px solid #d0d0d0;
 }
 
-
 .dashboard-paginate {
-    width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: end;
-    /* border: 1px solid black; */
-    background: #F4F5F7;
-    padding: 5px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: end;
+  /* border: 1px solid black; */
+  /* background: #f4f5f7; */
+  padding: 5px;
 }
 
 ul {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .dashboard-paginate .page-limit {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
 }
 
 .dashboard-paginate .page-limit .limit select {
-    display: flex;
-    width: 68px;
-    height: 36px;
-    padding: 9px 12px;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    border: 1px solid #D0D0D0;
-    border-radius: 2px;
+  display: flex;
+  width: 68px;
+  height: 36px;
+  padding: 9px 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid #d0d0d0;
+  border-radius: 2px;
 }
 
-
 .dashboard-paginate .jump-to-page select {
-    display: inline-flex;
-    width: 76px;
-    height: 36px;
-    padding: 9px 12px;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 2px 0px 0px 2px;
-    border: 1px solid #D0D0D0;
-    /* background-color: #F4F5F7; */
+  display: inline-flex;
+  width: 76px;
+  height: 36px;
+  padding: 9px 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid #d0d0d0;
+  /* background-color: #F4F5F7; */
 }
 
 .dashboard-month .calendar-btn {
-    display: flex;
-    padding: 7.1px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    right: 22px;
-    bottom: -0.4px;
-    border-radius: 0px 2px 2px 0px;
-    background: #0D28A6;
-    color: white;
-    border: none;
+  display: flex;
+  padding: 7.1px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  right: 22px;
+  bottom: -0.4px;
+  border-radius: 0px 2px 2px 0px;
+  background: #0d28a6;
+  color: white;
+  border: none;
 }
 
-.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #D0D0D0 !important;
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+  .MuiOutlinedInput-notchedOutline {
+  border: 1px solid #d0d0d0 !important;
 }
 
 #dashboard input {
-    border: none;
+  border: none;
 }
 
 #dashboard select {
-    border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
 }
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-    background-color: #F4F5F7 !important;
+  background-color: #f4f5f7 !important;
 }
 
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: 8px 5px 8px 12px !important;
-    width: 110px !important;
-    height: auto !important;
-    font-size: 16px !important;
+  padding: 8px 5px 8px 12px !important;
+  width: 110px !important;
+  height: auto !important;
+  font-size: 16px !important;
 }
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-    border-radius: 2px 0px 0px 2px !important;
+  border-radius: 2px 0px 0px 2px !important;
 }
 
 .table-container {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .jump-to-page button {
-    display: inline-flex;
-    position: relative;
-    top: -2px;
-    padding: 6px 12px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0px 2px 2px 0px;
-    background: #0D28A6;
-    border: none;
-    color: white;
+  display: inline-flex;
+  position: relative;
+  height: 36px;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 2px 2px 0px;
+  background: #0d28a6;
+  border: none;
+  color: white;
 }
 
 .jump-to-page p,
 .page-limit p {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
 }

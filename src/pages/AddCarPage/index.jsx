@@ -62,7 +62,7 @@ const AddCarPage = () => {
 
       setTimeout(() => {
         navigate("/cars");
-      }, 500);
+      }, 1000);
       dispatch({
         type: TYPES.IS_SUBMIT,
         payload: {
