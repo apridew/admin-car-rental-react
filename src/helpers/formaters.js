@@ -20,6 +20,12 @@ export const dateFormater = (inputDate) => {
   return formattedDate.replace(/\//g, "-").replace(",", ", ");
 };
 
+export const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+  return formattedDate;
+};
+
 export const categoryTextFormater = (category) => {
   let categoryText = "";
   if (category === "small") {
@@ -36,4 +42,4 @@ export const categoryTextFormater = (category) => {
 
 export const scrollTop = () => {
   return window.scrollTo(0, 0);
-};
+}
