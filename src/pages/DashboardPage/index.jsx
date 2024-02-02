@@ -73,6 +73,7 @@ const DashboardPage = () => {
   const dispatch = useDispatch();
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
       legend: {
@@ -136,7 +137,7 @@ const DashboardPage = () => {
         labels: newLabels,
         datasets: [
           {
-            label: "Date",
+            label: "orderCount",
             data: ress.data.map((item) => item.orderCount),
             backgroundColor: "#586B90",
           },
@@ -271,7 +272,7 @@ const DashboardPage = () => {
                   </div>
 
                   <div className="dashboard-chart ">
-                    <Bar options={options} data={data} />
+                    <Bar options={options} data={data} width={"100"} height={"50"}/>
                   </div>
                 </div>
 
