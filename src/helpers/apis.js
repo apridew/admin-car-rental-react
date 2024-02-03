@@ -1,15 +1,14 @@
 import axios from "axios";
 
-const token = localStorage.getItem("accesToken");
-const config = {
-  headers: {
-    access_token: token,
-  },
-};
-
 // API Get Cars
 export const getCars = async (name, category, page, totalPage) => {
   try {
+    const token = localStorage.getItem("accesToken");
+    const config = {
+      headers: {
+        access_token: token,
+      },
+    };
     const response = await axios.get(
       `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=${page}&pageSize=${totalPage}`,
       config
@@ -26,6 +25,12 @@ export const getCars = async (name, category, page, totalPage) => {
 // API Detail Car
 export const detailCar = async (id) => {
   try {
+    const token = localStorage.getItem("accesToken");
+    const config = {
+      headers: {
+        access_token: token,
+      },
+    };
     const response = await axios.get(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
       config
@@ -42,6 +47,12 @@ export const detailCar = async (id) => {
 // API Add Car
 export const addCar = async (formData) => {
   try {
+    const token = localStorage.getItem("accesToken");
+    const config = {
+      headers: {
+        access_token: token,
+      },
+    };
     const response = await axios.post(
       "https://api-car-rental.binaracademy.org/admin/car",
       formData,
@@ -57,6 +68,12 @@ export const addCar = async (formData) => {
 // API Delete Car
 export const deleteCar = async (id) => {
   try {
+    const token = localStorage.getItem("accesToken");
+    const config = {
+      headers: {
+        access_token: token,
+      },
+    };
     const response = await axios.delete(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
       config
@@ -71,6 +88,12 @@ export const deleteCar = async (id) => {
 // API Edit Car
 export const editCar = async (formData, id) => {
   try {
+    const token = localStorage.getItem("accesToken");
+    const config = {
+      headers: {
+        access_token: token,
+      },
+    };
     const response = await axios.put(
       `https://api-car-rental.binaracademy.org/admin/car/${id}`,
       formData,
@@ -86,7 +109,12 @@ export const editCar = async (formData, id) => {
 // API Get All Order
 export const getAllOrder = async ({ selected, limit }) => {
   const sortParam = " created_at:asc&user_email:desc";
-
+  const token = localStorage.getItem("accesToken");
+  const config = {
+    headers: {
+      access_token: token,
+    },
+  };
   const ress = await axios.get(
     `https://api-car-rental.binaracademy.org/admin/v2/order?sort=${sortParam}&page=${
       selected + 1
