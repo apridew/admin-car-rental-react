@@ -166,9 +166,9 @@ const CarsPage = () => {
                 <AllCars />
               )}
               <div className="bottom-cars d-flex justify-content-between align-items-center">
-                {!isSearch && (
+                {/* {!isSearch && (
                   <PaginationCars name_car={name_car} category={""} />
-                )}
+                )} */}
                 <p className="m-0 fw-bold d-flex align-items-center gap-3 py-3">
                   Total Cars : {car_list.length ? car_list.length : "0"}
                   <a>|</a>

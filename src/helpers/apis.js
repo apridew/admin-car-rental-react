@@ -10,7 +10,7 @@ export const getCars = async (name, category, page, totalPage) => {
       },
     };
     const response = await axios.get(
-      `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=${page}&pageSize=${totalPage}`,
+      `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&minPrice=1&maxPrice=999999999&category=${category}&page=${page}&pageSize=${totalPage}`,
       config
     );
     console.log(response.data);
