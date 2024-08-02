@@ -108,7 +108,7 @@ export const editCar = async (formData, id) => {
 
 // API Get All Order
 export const getAllOrder = async ({ selected, limit }) => {
-  const sortParam = " created_at:asc&user_email:desc";
+  const sortParam = " created_at:desc";
   const token = localStorage.getItem("accesToken");
   const config = {
     headers: {

@@ -104,7 +104,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
               <p>Cars</p>
             </div>
           </div>
-          <div className="side-bar-right d-flex flex-column">
+          <div className="side-bar-right d-none d-xl-flex flex-column">
             <h5 className="d-flex align-items-center">Binar Car Rental</h5>
             <p>{chooseSidebar ? "Dashboard" : "Cars"}</p>
             <button>{chooseSidebar ? "Dashboard" : "List Car"}</button>
@@ -114,13 +114,13 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
 
         {/* START NAVBAR*/}
         <div className="col bar-content bg-body-secondary">
-          <div className="header-bar d-flex align-items-center justify-content-between bg-white gap-4">
+          <div className="header-bar h-auto py-3 d-flex align-items-center justify-content-between bg-white">
             {showSidebar ? (
               <i className="bi bi-x" onClick={sidebarShow}></i>
             ) : (
               <i className="bi bi-list" onClick={sidebarShow}></i>
             )}
-            <div className="header-bar-right d-flex gap-4">
+            <div className="header-bar-right flex-column flex-sm-row d-flex gap-4">
               <div className="searh-box d-flex align-items-center">
                 <span>
                   <i className="bi bi-search"></i>
@@ -148,7 +148,7 @@ const Navbar = ({ main, submitSearch, resetSearch }) => {
                   </button>
                 )}
               </div>
-              <div className="user-profile d-flex align-items-center gap-2">
+              <div className="user-profile d-flex justify-content-end align-items-center gap-2">
                 <a className="avatar">A</a>
                 <div className="dropdown">
                   <button

@@ -41,7 +41,6 @@
 
 .dashboard-month {
   display: flex;
-  /* padding: 8px 5px 8px 12px; */
   justify-content: flex-start;
   align-items: flex-start;
   gap: 21px;
@@ -49,8 +48,19 @@
   margin: 20px 0;
 }
 
+.lnOUep {
+  overflow: visible !important;
+}
+
+.faZveH:not(:first-child) {
+  flex-grow: 1 !important;
+}
+
+.faZveH {
+  flex-grow: 0 !important;
+}
+
 canvas {
-  /* width: 100% !important; */
   height: 450px !important;
 }
 
@@ -61,16 +71,6 @@ canvas {
   align-items: flex-start;
   gap: 21px;
   border: 1px solid #d0d0d0;
-}
-
-.dashboard-paginate {
-  width: 100%;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: end;
-  /* border: 1px solid black; */
-  /* background: #f4f5f7; */
-  padding: 5px;
 }
 
 ul {
@@ -106,7 +106,6 @@ ul {
   flex-shrink: 0;
   border-radius: 2px 0px 0px 2px;
   border: 1px solid #d0d0d0;
-  /* background-color: #F4F5F7; */
 }
 
 .dashboard-month .calendar-btn {
@@ -153,7 +152,6 @@ ul {
 
 .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 8px 5px 8px 12px !important;
-  /* width: 110px !important; */
   height: auto !important;
   font-size: 16px !important;
 }

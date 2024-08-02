@@ -4,22 +4,15 @@ import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import { TYPES } from "../../redux/type";
 import * as reqAPI from "../../helpers/apis";
-
 import ReactPaginate from "react-paginate";
 import DataTable from "react-data-table-component";
 import { StyleSheetManager } from "styled-components";
-import {
-  DatePicker,
-  LocalizationProvider,
-  YearCalendar,
-} from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ChevronDown } from "react-feather";
 import dayjs from "dayjs";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
-
 import "./style.css";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -58,14 +51,12 @@ const customStyles = {
   cells: {
     style: {
       fontSize: "15px",
-      // textTransform: 'lowercase',
     },
   },
 };
 
 const DashboardPage = () => {
   const { orders } = useSelector((state) => state.tableReducer);
-  // console.log(orders);
   const [limit, setlimit] = useState("");
   const [jumpToPage, setJumpToPage] = useState("");
 
@@ -156,7 +147,7 @@ const DashboardPage = () => {
 
   const columns = [
     {
-      name: "No",
+      name: "ID Trx",
       selector: (row) => row.id - 1,
       sortable: true,
     },
@@ -167,7 +158,7 @@ const DashboardPage = () => {
     },
     {
       name: "Car Name",
-      selector: (row) => "Car",
+      selector: (row) => row?.Car?.name || "Not Valid",
       sortable: true,
     },
     {
@@ -187,7 +178,7 @@ const DashboardPage = () => {
     },
     {
       name: "Category",
-      selector: (row) => "Category",
+      selector: (row) => formater.categoryTextFormater(row?.Car?.category),
       sortable: true,
     },
   ];
@@ -216,7 +207,6 @@ const DashboardPage = () => {
   const handleChangeSelect = (e) => {
     console.log(e.target.value);
     setlimit(e.target.value);
-    // handleTable({ selected: 0 })
   };
 
   const handleJumpToPage = (e) => {
@@ -272,7 +262,12 @@ const DashboardPage = () => {
                   </div>
 
                   <div className="dashboard-chart ">
-                    <Bar options={options} data={data} width={"100"} height={"50"}/>
+                    <Bar
+                      options={options}
+                      data={data}
+                      width={"100"}
+                      height={"50"}
+                    />
                   </div>
                 </div>
 
@@ -294,42 +289,44 @@ const DashboardPage = () => {
                     ></DataTable>
                   </div>
 
-                  <div className="dashboard-paginate">
-                    <div className="page-limit">
-                      <div className="limit">
-                        <p>Limit</p>
-                        <select
-                          name="limit"
-                          id="limit"
-                          onChange={handleChangeSelect}
-                          value={limit}
-                        >
-                          <option value="10" defaultChecked>
-                            10
-                          </option>
-                          <option value="15">15</option>
-                          <option value="20">20</option>
-                        </select>
-                      </div>
-
-                      <div className="jump-to-page">
-                        <p>Jump To Page</p>
-                        <select
-                          name="jump-to-page"
-                          id="jump-to-page"
-                          onChange={handleJumpToPage}
-                          value={jumpToPage}
-                        >
-                          {Array.from(
-                            { length: orders.pageCount },
-                            (_, i) => i + 1
-                          ).map((item, index) => (
-                            <option key={index} value={item}>
-                              {item}
+                  <div className="d-flex align-items-end gap-3 justify-content-between flex-column flex-md-row">
+                    <div className="dashboard-paginate d-flex">
+                      <div className="page-limit">
+                        <div className="limit">
+                          <p>Limit</p>
+                          <select
+                            name="limit"
+                            id="limit"
+                            onChange={handleChangeSelect}
+                            value={limit}
+                          >
+                            <option value="10" defaultChecked>
+                              10
                             </option>
-                          ))}
-                        </select>
-                        <button onClick={handleButton}>Go</button>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                          </select>
+                        </div>
+
+                        <div className="jump-to-page">
+                          <p>Jump To Page</p>
+                          <select
+                            name="jump-to-page"
+                            id="jump-to-page"
+                            onChange={handleJumpToPage}
+                            value={jumpToPage}
+                          >
+                            {Array.from(
+                              { length: orders.pageCount },
+                              (_, i) => i + 1
+                            ).map((item, index) => (
+                              <option key={index} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          </select>
+                          <button onClick={handleButton}>Go</button>
+                        </div>
                       </div>
                     </div>
 
@@ -337,7 +334,6 @@ const DashboardPage = () => {
                       previousLabel="&laquo;"
                       nextLabel="&raquo;"
                       pageCount={orders.pageCount}
-                      // pageRangeDisplayed={}
                       marginPagesDisplayed={(2, 1)}
                       breakLabel="..."
                       onPageChange={handlePageClick}
