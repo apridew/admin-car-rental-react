@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
-import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import { TYPES } from "../../redux/type";
 import * as reqAPI from "../../helpers/apis";
@@ -59,7 +58,6 @@ const DashboardPage = () => {
   const { orders } = useSelector((state) => state.tableReducer);
   const [limit, setlimit] = useState("");
   const [jumpToPage, setJumpToPage] = useState("");
-
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
@@ -78,8 +76,14 @@ const DashboardPage = () => {
     },
   };
 
+  const [year, day, month] = new Date()
+    .toLocaleDateString()
+    .split("/")
+    .reverse();
+  const todayDate = `${year}-${month}-${day}`;
+
   const [data, setData] = useState({
-    labels: [...Array(30)].map((_, index) => index + 1),
+    labels: [...Array(31)].map((_, index) => index + 1),
     datasets: [
       {
         label: "Date",
@@ -90,34 +94,19 @@ const DashboardPage = () => {
   });
 
   const handleValue = (newValue) => {
-    console.log(`new value selected: ${newValue.$M + 1}-${newValue.$y}`);
-    setValue(`${newValue.$M + 1}-${newValue.$y}`);
+    const formattedValue = dayjs(newValue).format("MM-YYYY");
+    setValue(formattedValue);
   };
+  const firstDayOfmonth = value
+    ? dayjs(value, "MM-YYYY").startOf("month").format("YYYY-MM-DD")
+    : "";
+  const lastDayOfMonth = value
+    ? dayjs(value, "MM-YYYY").endOf("month").format("YYYY-MM-DD")
+    : "";
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("accesToken");
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-
-    const [selectedMonth, selectedYear] = value.split("-");
-    const firstDayOfMonth = `${selectedYear}-${selectedMonth}-01`;
-    const lastDayOfMonth = new Date(
-      selectedYear,
-      new Date(`${selectedMonth} 1, ${selectedYear}`).getMonth() + 1,
-      0
-    )
-      .toISOString()
-      .split("T")[0];
-
     try {
-      const ress = await axios.get(
-        `https://api-car-rental.binaracademy.org/admin/order/reports?from=${firstDayOfMonth}&until=${lastDayOfMonth}`,
-        config
-      );
-      console.log(ress.data);
+      const ress = await reqAPI.getOrderCount(firstDayOfmonth, lastDayOfMonth);
 
       const newLabels = Array.from(
         { length: ress.data.length },
@@ -143,7 +132,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     handleTable({ selected: 0 });
-  }, []);
+  }, [data, value]);
 
   const columns = [
     {
@@ -249,8 +238,8 @@ const DashboardPage = () => {
                   <p className="mb-2 mt-3">Month</p>
                   <div className="dashboard-month mt-0 mb-5">
                     <DatePicker
-                      defaultValue={dayjs(new Date())}
-                      views={["year", "month"]}
+                      defaultValue={dayjs(todayDate)}
+                      views={["month", "year"]}
                       onChange={handleValue}
                       maxDate={dayjs(new Date())}
                       slots={{ openPickerIcon: ChevronDown }}

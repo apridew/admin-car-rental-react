@@ -124,3 +124,20 @@ export const getAllOrder = async ({ selected, limit }) => {
 
   return ress;
 };
+
+// API Get Order Count
+export const getOrderCount = async (firstDayOfMonth, lastDayOfMonth) => {
+  const token = localStorage.getItem("accesToken");
+  const config = {
+    headers: {
+      access_token: token,
+    },
+  };
+
+  const ress = await axios.get(
+    `https://api-car-rental.binaracademy.org/admin/order/reports?from=${firstDayOfMonth}&until=${lastDayOfMonth}`,
+    config
+  );
+
+  return ress;
+};
