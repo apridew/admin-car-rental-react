@@ -21,8 +21,11 @@ export const dateFormater = (inputDate) => {
 };
 
 export const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const formattedDate = new Date(dateString).toLocaleDateString(
+    "en-US",
+    options
+  );
   return formattedDate;
 };
 
@@ -35,11 +38,11 @@ export const categoryTextFormater = (category) => {
   } else if (category === "large") {
     categoryText = "6 - 8 people";
   } else {
-    categoryText = "Undefined";
+    categoryText = "Not Valid";
   }
   return categoryText;
 };
 
 export const scrollTop = () => {
   return window.scrollTo(0, 0);
-}
+};
